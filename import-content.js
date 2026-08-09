@@ -39,9 +39,12 @@
 //     the source. Pages without a source file keep whatever content they already have
 //     (safe to run repeatedly as a client sends more material over time).
 //   - A page's downloads are only overwritten if that page's download/ folder exists
-//     and has files in it. Files inside it are copied into
+//     and has files in it. Files directly inside it are copied into
 //     assets/downloads/<category>/<page>/ and become the page's downloads array
-//     (label = filename, type = extension).
+//     (label = filename, type = extension). A SUBFOLDER inside download/ is
+//     treated as one asset kit and zipped into a single .zip download (e.g.
+//     download/logo/ with dozens of format/variant files becomes one
+//     "Logo.zip" button) — requires the system `zip` command.
 //   - Markdown supports: paragraphs, "## " subheadings, "- " bullet lists, pipe
 //     tables, and ![alt](file.png) images — the image file must sit in that page's
 //     own content/ folder; it's copied into assets/images/ automatically. (Video
@@ -50,6 +53,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const { execFileSync } = require("child_process");
 
 const ROOT = __dirname;
 
@@ -114,7 +118,10 @@ function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, cop
       continue;
     }
 
-    const imgMatch = line.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+    // Tolerate a whole line wrapped in quotes (some editors/apps do this when
+    // pasting an image reference), e.g. "![alt](file.jpg)" with real quote marks.
+    const unquoted = line.replace(/^["']|["']$/g, "");
+    const imgMatch = unquoted.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
     if (imgMatch) {
       flushParagraph();
       const alt = imgMatch[1];
@@ -159,6 +166,28 @@ function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, cop
   }
   flushParagraph();
   return blocks;
+}
+
+function zipDirectory(srcDir, destZipPath) {
+  // Uses the system `zip` binary (present by default on macOS/Linux). Zips
+  // the *contents* of srcDir, not the folder itself, so extracting the
+  // download lands the files directly instead of one level deeper.
+  execFileSync("zip", ["-rq", destZipPath, "."], { cwd: srcDir });
+}
+
+function listFilesRecursive(dir, relPrefix = "") {
+  const out = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.name.startsWith(".")) continue;
+    const full = path.join(dir, entry.name);
+    const rel = relPrefix ? `${relPrefix}/${entry.name}` : entry.name;
+    if (entry.isDirectory()) {
+      out.push(...listFilesRecursive(full, rel));
+    } else {
+      out.push({ full, rel });
+    }
+  }
+  return out;
 }
 
 function copyImageFactory(destImagesDir) {
@@ -216,23 +245,56 @@ function main() {
 
       const downloadsDir = path.join(pageDir, "download");
       if (fs.existsSync(downloadsDir) && fs.statSync(downloadsDir).isDirectory()) {
-        const files = fs
-          .readdirSync(downloadsDir)
-          .filter((f) => !f.startsWith(".") && f !== ".gitkeep");
-        if (files.length) {
+        const entries = fs
+          .readdirSync(downloadsDir, { withFileTypes: true })
+          .filter((e) => !e.name.startsWith("."));
+        if (entries.length) {
           const destDir = path.join(ROOT, "assets/downloads", category.slug, page.slug);
           fs.mkdirSync(destDir, { recursive: true });
-          page.downloads = files.map((f) => {
-            fs.copyFileSync(path.join(downloadsDir, f), path.join(destDir, f));
-            const ext = path.extname(f).replace(".", "").toUpperCase();
-            return {
-              label: titleCaseFromFilename(f),
-              type: ext,
-              url: `../../assets/downloads/${category.slug}/${page.slug}/${encodeURIComponent(f)}`,
-            };
-          });
-          downloadsUpdated++;
-          console.log(`  downloads: ${category.slug}/${page.slug}/download/ -> ${files.length} file(s)`);
+          const downloads = [];
+          for (const entry of entries) {
+            const entryPath = path.join(downloadsDir, entry.name);
+            if (entry.isDirectory()) {
+              // A subfolder is a whole asset kit (e.g. every format/variant of
+              // one logo lockup) — bundle it into a single .zip download
+              // rather than one download button per file inside it.
+              const zipName = `${entry.name}.zip`.replace(/\s+/g, "-");
+              const zipDest = path.join(destDir, zipName);
+              try {
+                zipDirectory(entryPath, zipDest);
+                downloads.push({
+                  label: titleCaseFromFilename(entry.name),
+                  type: "ZIP",
+                  url: `../../assets/downloads/${category.slug}/${page.slug}/${encodeURIComponent(zipName)}`,
+                });
+              } catch (err) {
+                console.warn(`  ! couldn't zip "${entry.name}/" (is the "zip" command installed?) — copying its files individually instead`);
+                for (const { full, rel } of listFilesRecursive(entryPath)) {
+                  const flatName = `${entry.name}-${rel}`.replace(/[\\/\s]+/g, "-");
+                  fs.copyFileSync(full, path.join(destDir, flatName));
+                  const ext = path.extname(flatName).replace(".", "").toUpperCase();
+                  downloads.push({
+                    label: titleCaseFromFilename(`${entry.name} ${rel}`),
+                    type: ext,
+                    url: `../../assets/downloads/${category.slug}/${page.slug}/${encodeURIComponent(flatName)}`,
+                  });
+                }
+              }
+            } else {
+              fs.copyFileSync(entryPath, path.join(destDir, entry.name));
+              const ext = path.extname(entry.name).replace(".", "").toUpperCase();
+              downloads.push({
+                label: titleCaseFromFilename(entry.name),
+                type: ext,
+                url: `../../assets/downloads/${category.slug}/${page.slug}/${encodeURIComponent(entry.name)}`,
+              });
+            }
+          }
+          if (downloads.length) {
+            page.downloads = downloads;
+            downloadsUpdated++;
+            console.log(`  downloads: ${category.slug}/${page.slug}/download/ -> ${downloads.length} item(s)`);
+          }
         }
       }
     }
