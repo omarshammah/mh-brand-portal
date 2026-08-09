@@ -1,0 +1,517 @@
+[
+  {
+    "id": "who-we-are",
+    "slug": "who-we-are",
+    "title": "Who We Are",
+    "categoryId": "brand",
+    "order": 1,
+    "summary": "Company overview, founding story, and purpose statement.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. This page typically opens with a short overview of the company: what it does, who it serves, and why it exists."
+      },
+      {
+        "type": "p",
+        "text": "Include the founding story in a few sentences and a one-line purpose statement that a new employee or partner could repeat back after reading it once."
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "id": "mission-vision",
+    "slug": "mission-and-vision",
+    "title": "Our Mission and Vision",
+    "categoryId": "brand",
+    "order": 2,
+    "summary": "Mission statement, vision statement, and guiding principles.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. State the mission (what we do today) and the vision (the future we're working toward) as two distinct, quotable lines."
+      },
+      {
+        "type": "p",
+        "text": "Follow with 3–5 guiding principles that explain how decisions get made when the mission and vision aren't enough on their own."
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "id": "brand-dna",
+    "slug": "our-brand-dna",
+    "title": "Our Brand DNA",
+    "categoryId": "brand",
+    "order": 3,
+    "summary": "Core brand pillars, attributes, and positioning statement.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. List the 3–5 core attributes that define the brand at its root, and a single positioning statement (for [audience], [brand] is the [category] that [differentiator])."
+      },
+      {
+        "type": "p",
+        "text": "This page is the reference point every other guideline should trace back to."
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "id": "personality",
+    "slug": "our-personality",
+    "title": "Our Personality",
+    "categoryId": "brand",
+    "order": 4,
+    "summary": "Personality traits or archetype, brand character do's and don'ts.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Describe the brand as if it were a person: traits, archetype, and how it behaves in a room."
+      },
+      {
+        "type": "p",
+        "text": "Add a short do's/don'ts list so writers and designers can self-check tone at a glance."
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "id": "tone-of-voice",
+    "slug": "our-tone-of-voice",
+    "title": "Our Tone of Voice",
+    "categoryId": "brand",
+    "order": 5,
+    "summary": "Voice principles, tone spectrum, and example phrases.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Define 3–4 voice principles (e.g. clear, warm, direct, never salesy) and show a tone spectrum for different contexts (support vs. marketing vs. legal)."
+      },
+      {
+        "type": "p",
+        "text": "Include a few before/after example phrases so the guidance is concrete, not abstract."
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "id": "logo-system",
+    "slug": "logo-system",
+    "title": "Logo System",
+    "categoryId": "brand-guidelines",
+    "order": 1,
+    "summary": "Primary logo, lockups, clearspace, minimum size, and misuse examples.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Show the primary logo, approved lockups/variants, clearspace rules, minimum size, and a set of misuse examples (stretching, recoloring, low contrast, etc.)."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Print",
+        "type": "AI / EPS / PDF",
+        "url": "#"
+      },
+      {
+        "label": "Digital",
+        "type": "SVG / PNG",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "color-palette",
+    "slug": "color-palette",
+    "title": "Color Palette",
+    "categoryId": "brand-guidelines",
+    "order": 2,
+    "summary": "Primary/secondary palette with HEX, RGB, CMYK, and Pantone values.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. List primary and secondary colors with HEX, RGB, CMYK, and Pantone values, plus recommended usage ratios (e.g. 60/30/10)."
+      },
+      {
+        "type": "table",
+        "headers": [
+          "Swatch",
+          "Name",
+          "HEX",
+          "RGB",
+          "Usage"
+        ],
+        "rows": [
+          [
+            "■",
+            "Primary Navy",
+            "#1F2A44",
+            "31, 42, 68",
+            "Backgrounds, headlines"
+          ],
+          [
+            "■",
+            "Accent Blue",
+            "#3B5BFE",
+            "59, 91, 254",
+            "CTAs, links, highlights"
+          ],
+          [
+            "■",
+            "Light Gray",
+            "#F2F3F7",
+            "242, 243, 247",
+            "Section backgrounds"
+          ]
+        ]
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Color Swatches (ASE)",
+        "type": "ASE",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "typography",
+    "slug": "typography",
+    "title": "Typography",
+    "categoryId": "brand-guidelines",
+    "order": 3,
+    "summary": "Typeface families, weights, hierarchy, and web fallbacks.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Specify primary and secondary typefaces, weights in use, type hierarchy (H1–body–caption), and web-safe fallback stacks."
+      },
+      {
+        "type": "list",
+        "items": [
+          "Display / H1 — 34px, bold, Primary typeface",
+          "H2 — 22px, medium, Primary typeface",
+          "Body — 16px, regular, Secondary typeface",
+          "Caption — 13px, regular, Secondary typeface"
+        ]
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "id": "form-language",
+    "slug": "form-language",
+    "title": "Form Language",
+    "categoryId": "brand-guidelines",
+    "order": 4,
+    "summary": "Shape language, iconography style, and signature graphic devices.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Define the shape vocabulary (rounded vs. sharp, geometric vs. organic), the icon style, and any signature graphic devices or patterns."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Icon Pack",
+        "type": "SVG / PNG",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "grids-layouts",
+    "slug": "grids-and-layouts",
+    "title": "Grids & Layouts",
+    "categoryId": "brand-guidelines",
+    "order": 5,
+    "summary": "Grid systems, spacing rules, and layout examples across formats.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Show the grid system (columns, gutters, margins) at a couple of common sizes, plus 2–3 example layouts that demonstrate the spacing rules in practice."
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "id": "copywriting",
+    "slug": "copywriting",
+    "title": "Copywriting",
+    "categoryId": "brand-guidelines",
+    "order": 6,
+    "summary": "Writing guidelines, grammar/style rules, and terminology glossary.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Cover house style rules (capitalization, punctuation, numerals), preferred/avoided terminology, and a short glossary of brand-specific terms."
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "id": "animation-video",
+    "slug": "animation-and-video",
+    "title": "Animation & Video",
+    "categoryId": "brand-guidelines",
+    "order": 7,
+    "summary": "Motion principles, logo animation rules, and timing/easing standards.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Describe motion principles (pace, easing, restraint), rules for animating the logo, and standard timing/easing values to keep motion consistent across editors."
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "id": "art-direction",
+    "slug": "art-direction",
+    "title": "Art Direction",
+    "categoryId": "brand-guidelines",
+    "order": 8,
+    "summary": "Photography style, imagery mood boards, and illustration style.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Show reference imagery for photography style (lighting, framing, color grading), mood boards, and illustration style if applicable."
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "id": "business-cards",
+    "slug": "business-cards",
+    "title": "Business Cards",
+    "categoryId": "stationery",
+    "order": 1,
+    "summary": "Specs and print-ready templates.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Confirm size, bleed, stock, and finish, then link the print-ready template files below."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Business Card Template",
+        "type": "INDD / AI / PDF",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "letterheads",
+    "slug": "letterheads",
+    "title": "Letterheads",
+    "categoryId": "stationery",
+    "order": 2,
+    "summary": "Specs and print-ready templates.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Confirm size, margins, and paper stock, then link the print-ready template files below."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Letterhead Template",
+        "type": "INDD / AI / PDF",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "envelopes",
+    "slug": "envelopes",
+    "title": "Envelopes",
+    "categoryId": "stationery",
+    "order": 3,
+    "summary": "Specs and print-ready templates.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Confirm envelope size and placement rules, then link the print-ready template files below."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Envelope Template",
+        "type": "INDD / AI / PDF",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "collateral",
+    "slug": "collateral",
+    "title": "Collateral",
+    "categoryId": "stationery",
+    "order": 4,
+    "summary": "Branded collateral templates (folders, notepads, etc.).",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. List the collateral items covered here (folders, notepads, signage, etc.) and link their templates below."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Collateral Template Pack",
+        "type": "INDD / AI / PDF",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "brochures",
+    "slug": "brochures",
+    "title": "Brochures",
+    "categoryId": "editorial-templates",
+    "order": 1,
+    "summary": "Layout template with placeholder content and grid.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Provide the brochure layout template with the grid and placeholder copy blocks pre-built."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Brochure Template",
+        "type": "INDD / PDF",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "flyers",
+    "slug": "flyers",
+    "title": "Flyers",
+    "categoryId": "editorial-templates",
+    "order": 2,
+    "summary": "Layout template with placeholder content and grid.",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Provide the flyer layout template with the grid and placeholder copy blocks pre-built."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "Flyer Template",
+        "type": "INDD / PDF",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "video-16-9",
+    "slug": "16-9",
+    "title": "16:9",
+    "categoryId": "video-templates",
+    "order": 1,
+    "summary": "Landscape video template (YouTube, presentations).",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Landscape motion template with brand type, color, and logo animation pre-built."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "16:9 Template",
+        "type": "AEP / Premiere",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "video-9-16",
+    "slug": "9-16",
+    "title": "9:16",
+    "categoryId": "video-templates",
+    "order": 2,
+    "summary": "Vertical/story template (Reels, TikTok, Stories).",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Vertical motion template sized for Reels, TikTok, and Stories."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "9:16 Template",
+        "type": "AEP / Premiere",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "video-4-5",
+    "slug": "4-5",
+    "title": "4:5",
+    "categoryId": "video-templates",
+    "order": 3,
+    "summary": "Social feed template (Instagram/Facebook feed).",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Feed-optimized motion template for Instagram and Facebook."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "4:5 Template",
+        "type": "AEP / Premiere",
+        "url": "#"
+      }
+    ]
+  },
+  {
+    "id": "video-1-1",
+    "slug": "1-1",
+    "title": "1:1",
+    "categoryId": "video-templates",
+    "order": 4,
+    "summary": "Square template (square feed posts).",
+    "body": [
+      {
+        "type": "placeholder",
+        "text": "Placeholder — replace with your real content. Square motion template for feed posts."
+      }
+    ],
+    "downloads": [
+      {
+        "label": "1:1 Template",
+        "type": "AEP / Premiere",
+        "url": "#"
+      }
+    ]
+  },
+
+  { "id": "social-9-16", "slug": "9-16", "title": "9:16", "categoryId": "social-media-templates", "order": 1,
+    "summary": "Vertical static template (Reels cover, Stories, TikTok).",
+    "body": [
+      { "type": "placeholder", "text": "Placeholder — replace with your real content. Vertical static template sized for Stories, Reels covers, and TikTok." }
+    ],
+    "downloads": [
+      { "label": "9:16 Template", "type": "PSD / AI / Figma", "url": "#" }
+    ] },
+  { "id": "social-4-5", "slug": "4-5", "title": "4:5", "categoryId": "social-media-templates", "order": 2,
+    "summary": "Portrait static template (Instagram/Facebook feed).",
+    "body": [
+      { "type": "placeholder", "text": "Placeholder — replace with your real content. Portrait static template for feed posts on Instagram and Facebook." }
+    ],
+    "downloads": [
+      { "label": "4:5 Template", "type": "PSD / AI / Figma", "url": "#" }
+    ] },
+  { "id": "social-1-1", "slug": "1-1", "title": "1:1", "categoryId": "social-media-templates", "order": 3,
+    "summary": "Square static template (Instagram/Facebook feed).",
+    "body": [
+      { "type": "placeholder", "text": "Placeholder — replace with your real content. Square static template for feed posts." }
+    ],
+    "downloads": [
+      { "label": "1:1 Template", "type": "PSD / AI / Figma", "url": "#" }
+    ] }
+]

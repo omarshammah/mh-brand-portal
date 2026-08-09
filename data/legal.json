@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "imprint",
+    "title": "Imprint",
+    "body": [
+      { "type": "placeholder", "text": "Add the legal disclosure details required in your jurisdiction here (e.g. company/legal name, registered address, contact details, VAT/registration ID)." }
+    ]
+  },
+  {
+    "slug": "privacy-policy",
+    "title": "Privacy Policy",
+    "body": [
+      { "type": "placeholder", "text": "Add your privacy policy here — what data this site collects, how it's used, and how visitors can exercise their rights." }
+    ]
+  },
+  {
+    "slug": "cookie-policy",
+    "title": "Cookie Policy",
+    "body": [
+      { "type": "placeholder", "text": "Add your cookie policy here — what cookies this site uses (if any) and how visitors can manage their preferences." }
+    ]
+  }
+]

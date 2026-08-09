@@ -1,0 +1,752 @@
+:root {
+  --primary: __PRIMARY__;
+  --accent: __ACCENT__;
+  --light: __LIGHT__;
+  --text: __TEXT__;
+  --muted: __MUTED__;
+  --font: __FONT__;
+}
+
+@font-face {
+  font-family: "NeueCampton";
+  src: url("fonts/NeueCampton-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NeueCampton";
+  src: url("fonts/NeueCampton-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+
+/* Mobile browsers paint a grey overlay on any tappable element for a beat
+   after a tap (WebKit/Chrome's default "tap highlight"), which is what
+   showed up as a grey box flashing under the accordion header on click.
+   Turning it off here — on every link, label, and <summary> in the nav —
+   lets our own hover/active color changes be the only visible feedback. */
+a, label, summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Only two weights are used site-wide: Regular (400) wherever text would
+   otherwise default to bold (headings, table headers), and Light (300)
+   for everything else — see html, body below. */
+h1, h2, h3, th {
+  font-weight: 400;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  /* Safety net against page-level horizontal scroll: grid/flex children
+     (like .content) default to min-width:auto, which lets a wide child
+     (e.g. a table with nowrap cells) force the whole page wider instead of
+     scrolling internally. overflow-x:hidden here plus min-width:0 on the
+     grid items below closes that off — see .content and .layout. */
+  overflow-x: hidden;
+  /* Fluid base (1vw, matching omarshammah.com) with a legibility floor/ceiling
+     added on top: raw 1vw has no lower bound, so on a narrow phone
+     (e.g. 375px wide) it would shrink to ~3.75px and take every em-based
+     size in the navbar/sidebar down with it. clamp() keeps the same fluid
+     scaling across normal desktop widths (14px-20px covers ~1000px-2000px
+     viewports, where this was already landing) while flooring it at 14px so
+     nothing built on this base ever becomes unreadable, and capping it at
+     20px so it doesn't keep growing unbounded on very large monitors either. */
+  font-size: clamp(14px, 1vw, 20px);
+  font-family: "NeueCampton", var(--font);
+  font-weight: 300;
+  color: var(--text);
+  background: #fff;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* Navbar — dimensions/position matched to omarshammah.com's navbar spec.
+   position: sticky (not fixed) keeps it in normal document flow: the page
+   below it never needs to guess the navbar's exact height via a matching
+   padding-top. That guess was the root cause of the sidebar's first link
+   being hidden under the navbar on real phones — the navbar's rendered
+   height (padding + logo) didn't match the hardcoded vh offset the layout
+   was using to clear it. min-height (not height) lets the box grow if its
+   padding/content ever need more room, instead of clipping/overflowing. */
+.navbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 10vh;
+  padding: 2em 4em 1em; /* top cut from 5em for a shorter navbar on desktop/laptop widths */
+  position: sticky;
+  top: 0;
+  background: #fff;
+  color: var(--text);
+  z-index: 10;
+}
+/* .nav-links (the mobile menu panel) is a DOM *child* of .navbar, not a
+   sibling — so its z-index only competes with .navbar's OTHER children,
+   not with .navbar itself. .navbar's own border and logo are left as
+   plain, non-elevated children (no z-index of their own) so that once
+   .nav-links gets a higher explicit z-index (see the mobile breakpoint
+   below), it naturally paints over both — no separate display/visibility
+   toggling needed, and since nothing about the navbar's own layout ever
+   changes, the Close label (which DOES stay elevated, see .nav-toggle
+   -label) never shifts position between open and closed. */
+.navbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: #BEBEBE;
+}
+/* Logo — real DOM order confirmed via Webflow Designer API: a wrapping
+   div.logo-wrapper (flex layout only, no size) > a.logo (this is where the
+   4.6em width actually lives) > img.navbar-logo (no width of its own — it
+   sizes to its intrinsic aspect ratio inside the link's box). Previously the
+   4.6em width was applied straight to the <img>, which forced it to fill the
+   full box and rendered larger than the real site's logo. */
+.navbar .logo-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 1.2em; /* keeps the same spacing the × divider used to take up */
+}
+.navbar .logo-wrapper .logo {
+  display: flex;
+  /* omarshammah.com's real .logo is width:4.6em, and this box's structure/CSS
+     is now a byte-for-byte match to that (verified via the Webflow API) — but
+     it still reads oversized here, most likely because this project's own
+     logomark artwork is visually denser within its square canvas than the
+     real site's icon. Sized down empirically based on feedback; tell me
+     bigger/smaller and I'll adjust further. */
+  width: 3.4em; /* was 4.6em (too big), then 2.6em (too small) — splitting the difference */
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.navbar .logo-wrapper .logo .navbar-logo {
+  display: block;
+  max-width: 100%;
+  height: auto; /* no forced width — matches .navbar-logo on the real site, which has no size rule at all */
+}
+/* Placeholder for the client's own logo — drop assets/images/client-logo.svg
+   in and swap this box for an <img> referencing it (see README). */
+.navbar .logo-wrapper .client-logo-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.4em;
+  height: 2em;
+  border: 1px dashed #BEBEBE;
+  border-radius: 4px;
+  font-size: 10px;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--muted);
+  padding: 0 4px;
+}
+.navbar .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.navbar .nav-links a {
+  display: flex;
+  align-items: center;
+  font-family: "NeueCampton", var(--font);
+  font-weight: 400; /* matches omarshammah.com's .nav-button-text (400) — not the site's default Light weight */
+  color: var(--text);
+  font-size: 1em; /* omarshammah.com's nav text has no size override — it inherits body's 1vw directly */
+  line-height: 1.2;
+  padding: 8px 0;
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+/* Simple color-only states — no underline, no animation.
+   :visited is intentionally not styled: it marks every link you've ever
+   clicked (accumulating across the whole nav as you browse), which reads as
+   a confusing trail of grey links rather than "where am I now" — and it
+   only ever matches the exact page you're currently viewing by coincidence.
+   .active (set at build time, one page at a time) is the real "current
+   page" indicator, so it's the only state styled grey/permanent below. */
+.navbar .nav-links a:hover {
+  color: var(--muted);
+}
+.navbar .nav-links a:active {
+  color: var(--text);
+  opacity: 0.65;
+}
+.navbar .nav-links a.active {
+  color: var(--muted); /* current page — the one reliable, permanent indicator */
+}
+
+/* Each category ships two parallel controls (see navHtml() in build.js):
+   .nav-cat-link is the plain desktop link, .nav-cat-accordion (a native
+   <details>) is a checkbox-free, JS-free accordion used only below the
+   tablet breakpoint. On desktop, display:contents on .nav-item removes it
+   from the box model entirely so .nav-cat-link behaves exactly like the
+   old flat <a> did, and the accordion stays hidden. The mobile breakpoint
+   below flips which half is shown. */
+.navbar .nav-links .nav-item {
+  display: contents;
+}
+.navbar .nav-links .nav-cat-accordion {
+  display: none;
+}
+
+/* Menu toggle (checkbox-driven, no JS) — hidden on desktop, only ever shown
+   below the 991px tablet breakpoint. See the responsive section at the
+   bottom of this file for the collapsed state. The label holds both "Menu"
+   and "Close" text at once; only one is shown at a time via the checkbox's
+   :checked state (see below) — no JS needed to swap it. This is the only
+   close control in the whole menu, deliberately — it sits in exactly the
+   spot "Menu" occupied before the click, rather than adding a second,
+   differently-placed close button elsewhere in the panel. */
+.navbar .nav-toggle-checkbox {
+  display: none;
+}
+.navbar .nav-toggle-label {
+  display: none;
+}
+.navbar .nav-toggle-label .nav-toggle-text-close {
+  display: none;
+}
+.navbar .nav-toggle-checkbox:checked ~ .nav-toggle-label .nav-toggle-text-open {
+  display: none;
+}
+.navbar .nav-toggle-checkbox:checked ~ .nav-toggle-label .nav-toggle-text-close {
+  display: inline;
+}
+
+/* Layout — no manual top offset needed: the navbar is position:sticky and
+   stays in normal flow, so .layout just follows directly after it. */
+.layout {
+  display: grid;
+  grid-template-columns: 390px 1fr; /* 1.5x the previous 260px */
+  min-height: 100vh;
+}
+
+.sidebar {
+  border-right: 1px solid #BEBEBE;
+  /* Left padding matches the navbar's left padding (4em) so the logo and
+     sidebar links share the same left edge. Top padding matches .content's
+     (48px) so both columns start at the same height. */
+  padding: 48px 20px 28px 4em;
+  background: #fff;
+  min-width: 0; /* see html, body overflow-x note above */
+}
+.sidebar h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0 0 14px 0;
+}
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sidebar li a {
+  display: block;
+  position: relative;
+  padding: 9px 12px 9px 0;
+  border-radius: 6px;
+  font-size: 1em; /* matches the navbar links' fluid 1vw basis so the two stay visually consistent */
+  color: var(--text);
+  margin-bottom: 2px;
+  transform: translateX(0);
+  transition: transform 0.2s ease;
+}
+/* Dot sits in the gap the nudge opens up on the left side of the link —
+   only appears once the link is active (clicked), not on hover. */
+.sidebar li a::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text);
+  transform: translate(0, -50%) scale(0);
+  transition: transform 0.2s ease;
+}
+.sidebar li a:hover,
+.sidebar li a.active {
+  transform: translateX(10px);
+}
+.sidebar li a.active::before {
+  transform: translate(0, -50%) scale(1);
+}
+
+.content {
+  padding: 48px 56px;
+  max-width: 860px;
+  min-width: 0; /* lets wide children (e.g. a table) scroll internally instead of stretching the page */
+}
+.content .eyebrow {
+  color: rgb(129, 129, 129);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.content h1 {
+  font-size: 34px;
+  margin: 0 0 18px 0;
+  color: var(--primary);
+  text-transform: uppercase;
+}
+.content p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0 0 16px 0;
+}
+.content p.placeholder-note {
+  background: #FFF7E6;
+  border-left: 3px solid #F4B740;
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #6B4E00;
+}
+
+/* Category landing cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 28px;
+}
+.card {
+  border: 1px solid #BEBEBE;
+  border-radius: 10px;
+  padding: 18px 20px;
+  transition: box-shadow .15s, transform .15s;
+}
+.card:hover {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+.card .card-title {
+  font-weight: 400;
+  font-size: 15px;
+  margin-bottom: 6px;
+  color: var(--primary);
+}
+.card .card-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Content blocks: headings, lists, tables, images, embeds */
+.content h2.section-heading {
+  font-size: 20px;
+  color: var(--primary);
+  margin: 32px 0 12px 0;
+}
+.content ul.content-list {
+  margin: 0 0 16px 0;
+  padding-left: 20px;
+}
+.content ul.content-list li {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+table.content-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 24px 0;
+  font-size: 14px;
+}
+table.content-table th {
+  text-align: left;
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 12px;
+  font-weight: 400;
+}
+table.content-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #BEBEBE;
+}
+table.content-table tr:nth-child(even) td {
+  background: var(--light);
+}
+figure.content-figure {
+  margin: 8px 0 24px 0;
+}
+figure.content-figure img {
+  max-width: 100%;
+  border-radius: 8px;
+  border: 1px solid #BEBEBE;
+  display: block;
+}
+figure.content-figure figcaption {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.content-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 8px 0 24px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #BEBEBE;
+}
+.content-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Downloads panel */
+.downloads {
+  margin-top: 32px;
+  border-top: 1px solid #BEBEBE;
+  padding-top: 24px;
+}
+.downloads h3 {
+  font-size: 15px;
+  color: var(--primary);
+  margin-bottom: 14px;
+}
+.download-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #BEBEBE;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.download-item .file-label {
+  font-size: 14px;
+  font-weight: 400;
+}
+.download-item .file-type {
+  font-size: 12px;
+  color: var(--muted);
+}
+.download-item .btn {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--text);
+  font-size: 13px;
+  font-weight: 400;
+  padding: 8px 16px;
+  border-radius: 100vw;
+  transition: background-color .15s, color .15s;
+}
+.download-item .btn:hover {
+  background: var(--text);
+  color: #fff;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 56px;
+  font-size: 12px;
+  color: var(--muted);
+  border-top: 1px solid #BEBEBE;
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+footer a {
+  color: var(--muted); /* Imprint / Privacy Policy / Cookie Policy: grey */
+}
+footer a:hover {
+  text-decoration: underline;
+}
+footer a.footer-link-primary {
+  color: var(--text); /* black, per request — the one link that stands out */
+}
+
+/* Legal pages (Imprint, Privacy Policy, Cookie Policy) skip the sidebar
+   layout, so they need their own top offset to clear the fixed navbar. */
+/* No manual top offset needed here either now that the navbar is
+   position:sticky and stays in flow — just its own content padding. */
+.legal-content {
+  padding-top: 48px;
+  min-height: 60vh;
+}
+
+/* ==========================================================================
+   Responsive
+   Breakpoints (991px / 767px / 479px) are omarshammah.com's own tablet,
+   mobile-landscape, and mobile-portrait cutoffs, confirmed via the Webflow
+   Designer API — Webflow calls these "medium", "small", and "tiny". The real
+   site never shows inline nav links at all — Logo + Close/Contact/Menu sit
+   in the persistent navbar, and every page link lives inside a toggleable
+   full-screen menu, at every breakpoint. Here the inline links stay visible
+   on desktop as already built, and only collapse behind the "Menu" toggle
+   once they no longer fit — starting at the same 991px cutoff.
+   ========================================================================== */
+
+/* Tablet (medium, <=991px) */
+@media (max-width: 991px) {
+  /* Locks the page behind the menu from scrolling while it's open, so the
+     full-viewport panel actually behaves like a fixed fullscreen overlay
+     instead of the underlying page being able to scroll/rubber-band behind
+     it. :has() lets a plain checkbox drive a rule on `body`, an ancestor —
+     no JS needed. */
+  body:has(.navbar .nav-toggle-checkbox:checked) {
+    overflow: hidden;
+  }
+  .navbar {
+    min-height: 8vh; /* matches omarshammah.com's medium-breakpoint navbar height (was 10vh) */
+    /* The 6em top padding this used to carry (matched to the real site's
+       own value) was making the navbar noticeably taller than 8vh once you
+       add the logo — same root cause as the tiny-breakpoint logo/padding
+       fix a few rounds back: our root font-size is floored for legibility,
+       so em values borrowed from the real site's own (unfloored) scaling
+       land bigger here than intended. Back to a compact value instead. */
+    padding-top: 2em;
+  }
+  .navbar .nav-toggle-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative; /* gives z-index below something to apply to */
+    z-index: 13; /* stays above .nav-links (12) so Menu/Close is always visible, open or closed */
+    margin-left: auto; /* keeps this pinned to the right edge regardless of the logo's own width */
+    font-family: "NeueCampton", var(--font);
+    font-weight: 400;
+    color: var(--text);
+    font-size: 1.15em; /* matches the sidebar links at this breakpoint, not the (larger) nav-links */
+  }
+  .navbar .nav-links {
+    display: none;
+    position: fixed;
+    /* Truly fullscreen: inset:0 starts this at the very top-left corner of
+       the viewport. Its z-index (12) sits above the navbar's own border
+       and logo (neither has an explicit z-index of its own, see above),
+       so this panel naturally paints over both without needing to hide
+       them — the navbar's layout never changes between open and closed,
+       so Close never shifts position relative to where Menu was. Only
+       .nav-toggle-label stays elevated above this (z-index:13), which is
+       exactly what keeps Menu/Close visible throughout. padding-top still
+       needs to clear the navbar's actual height (logo included), since
+       that height is now always present, just visually covered. */
+    inset: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1.2em;
+    padding: 7em 4em 2em;
+    background: #fff;
+    overflow-y: auto;
+    z-index: 12;
+  }
+  .navbar .nav-toggle-checkbox:checked ~ .nav-links {
+    display: flex;
+  }
+  .navbar .nav-links a {
+    font-size: 1.15em; /* matches the sidebar links, not the (larger) desktop nav-links */
+  }
+
+  /* Below the tablet breakpoint the accordion replaces the plain link: the
+     sidebar is hidden as a separate stacked block (below) and its content
+     now lives inside .nav-subpages instead, so there's only one copy of
+     the page list on screen. */
+  .navbar .nav-links .nav-item {
+    display: block;
+    width: 100%;
+  }
+  .navbar .nav-links .nav-cat-link {
+    display: none;
+  }
+  /* Native <details> accordion — see navHtml() in build.js. All categories
+     share name="nav-cat-accordion", so opening one closes any other that
+     was open, and <details>'s own built-in behavior means clicking the
+     currently-open one's header collapses it again. Both come from the
+     browser for free, no JS. */
+  .navbar .nav-links .nav-cat-accordion {
+    display: block;
+    width: 100%;
+  }
+  .navbar .nav-links .nav-cat-toggle-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    list-style: none; /* remove the browser's default disclosure triangle */
+    font-family: "NeueCampton", var(--font);
+    font-weight: 400;
+    color: var(--text);
+    font-size: 1.15em; /* matches the plain nav-links a at this breakpoint */
+    padding: 8px 0;
+  }
+  .navbar .nav-links .nav-cat-toggle-label::-webkit-details-marker {
+    display: none; /* Safari/Chrome's older marker pseudo-element */
+  }
+  .navbar .nav-links .nav-cat-toggle-label:focus {
+    outline: none; /* avoids a lingering focus ring reading as a grey box on tap */
+  }
+  .navbar .nav-links .nav-cat-toggle-label.active {
+    color: var(--muted); /* current section — same "current page" grey used everywhere else */
+  }
+  .navbar .nav-links .nav-cat-toggle-label::after {
+    content: "+";
+    margin-left: 12px;
+    font-weight: 300;
+  }
+  .navbar .nav-links .nav-cat-accordion[open] > .nav-cat-toggle-label::after {
+    content: "\2212"; /* minus sign, once expanded */
+  }
+  .navbar .nav-links .nav-subpages {
+    /* Overrides the browser's default of not rendering a <details>'s body
+       at all when closed, so the max-height/opacity transition below has
+       something to actually animate instead of an abrupt show/hide. */
+    display: block;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding-left: 1.2em;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+  }
+  .navbar .nav-links .nav-cat-accordion[open] > .nav-subpages {
+    max-height: 800px; /* generous cap so any category's full subpage list can open */
+    opacity: 1;
+  }
+  .navbar .nav-links .nav-subpages a {
+    display: block;
+    font-size: 1.05em;
+    color: var(--text);
+    padding: 7px 0;
+  }
+  .navbar .nav-links .nav-subpages a:hover,
+  .navbar .nav-links .nav-subpages a.active {
+    color: var(--muted);
+  }
+
+  .layout {
+    grid-template-columns: 1fr; /* content now takes the full width */
+  }
+  .sidebar {
+    display: none; /* folded into the Menu accordion above instead of a separate stacked block */
+  }
+
+  .content {
+    padding: 32px 4em;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile landscape (small, <=767px) */
+@media (max-width: 767px) {
+  .navbar {
+    width: auto; /* matches the real site's small-breakpoint override */
+    /* Matches .content's/.sidebar's own left/right inset below, so the
+       space to the right of the Menu button equals the space to the left
+       of the logo and (when visible) the sidebar links. */
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+  .content,
+  .sidebar {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px 2em;
+  }
+  .footer-links {
+    flex-wrap: wrap;
+    gap: 12px 20px;
+  }
+  /* Keeps the open Menu dropdown's own left/right inset matching the navbar
+     and content at this breakpoint too. */
+  .navbar .nav-links {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+  /* Wide tables (e.g. the color palette) now scroll inside their own box
+     instead of stretching the whole page — starts here so it also covers
+     phones in landscape, not just the narrower "tiny" breakpoint below. */
+  table.content-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* Mobile portrait (tiny, <=479px) */
+@media (max-width: 479px) {
+  /* The previous logo (8.8em) and navbar padding (6em top + 4em bottom)
+     here were scaled from omarshammah.com's own tiny-breakpoint values, but
+     that scaling assumed a root font-size that keeps shrinking with the
+     viewport. Ours is floored at 14px (see html, body above) for legibility,
+     so those em multipliers landed far too large on a real phone — an
+     ~8.8em logo rendered at ~123px, over a third of a 390px-wide screen.
+     Reset to compact, phone-appropriate values instead. */
+  .navbar {
+    /* Sides match .content/.sidebar's 2em inset at this breakpoint (see the
+       767px block above); top/bottom cut down further (was 1.4em) to bring
+       the rendered height back down toward the 8vh target — the logo
+       itself is the real floor on how short this can get. */
+    min-height: 8vh;
+    padding: 0.8em 2em;
+  }
+  .navbar .logo-wrapper .logo {
+    width: 4em;
+  }
+  .navbar .logo-wrapper .client-logo-placeholder {
+    display: none; /* not enough room next to the logo + Menu label at this width */
+  }
+  .navbar .nav-links {
+    /* Still needs to clear the navbar's actual height here too — see the
+       note on .nav-links in the medium breakpoint above. */
+    padding-top: 6em;
+  }
+  .navbar .nav-links a {
+    font-size: 1.3em; /* matches the sidebar links, not the (larger) desktop nav-links */
+  }
+  .navbar .nav-links .nav-cat-toggle-label {
+    font-size: 1.3em; /* stays matched to the sidebar links, not the (larger) nav-links */
+  }
+
+  .sidebar li a {
+    font-size: 1.3em; /* matches the navbar's Menu button and its open links at this breakpoint */
+  }
+  .navbar .nav-toggle-label {
+    font-size: 1.3em; /* stays matched to the sidebar links, not the (larger) nav-links */
+  }
+
+  .download-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .download-item .btn {
+    align-self: flex-start;
+  }
+}

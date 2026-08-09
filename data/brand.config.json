@@ -1,0 +1,13 @@
+{
+  "siteName": "Brand Portal",
+  "clientName": "MH",
+  "logoText": "LOGO",
+  "colors": {
+    "primary": "#000000",
+    "accent": "#3071FF",
+    "light": "#E9E9E9",
+    "text": "#000000",
+    "muted": "#818181"
+  },
+  "fontFamily": "'Helvetica Neue', Arial, sans-serif"
+}

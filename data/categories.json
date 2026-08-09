@@ -1,0 +1,14 @@
+[
+  { "id": "brand", "slug": "brand", "name": "Brand", "order": 1,
+    "intro": "The foundation: who this brand is, why it exists, and how it thinks." },
+  { "id": "brand-guidelines", "slug": "brand-guidelines", "name": "Brand Guidelines", "order": 2,
+    "intro": "The visual and verbal system — logo, color, type, layout, voice, and direction." },
+  { "id": "stationery", "slug": "stationery", "name": "Stationery", "order": 3,
+    "intro": "Print-ready templates for everyday branded materials." },
+  { "id": "editorial-templates", "slug": "editorial-templates", "name": "Editorial Templates", "order": 4,
+    "intro": "Layout templates for printed and digital editorial pieces." },
+  { "id": "video-templates", "slug": "video-templates", "name": "Video Templates", "order": 5,
+    "intro": "Motion templates for every common aspect ratio." },
+  { "id": "social-media-templates", "slug": "social-media-templates", "name": "Social Media Templates", "order": 6,
+    "intro": "Static templates for every common social aspect ratio." }
+]
