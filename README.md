@@ -117,6 +117,8 @@ Brand-Portal/
       color-palette.md
       content/
       download/
+        Brand-Colors.ase        <- drop an Adobe Swatch Exchange file here and its
+                                    swatches auto-build the page's color table
     ...
   stationery/
     business-cards/
@@ -144,9 +146,24 @@ tables (`| A | B |`), and `![alt](image.png)` — the image file should sit in t
 in `content/` too, but aren't auto-embedded into the page yet — link them as a download
 instead, or use an `embed` block in `pages.json` for a hosted video URL.)
 
-Two safety rules make this repeatable as a project fills in over time: a page's body is
+**Color palette from an .ase file**: drop an Adobe Swatch Exchange (`.ase`) file straight into
+a page's `download/` folder (works on any page, but this is built for Color Palette) and the
+importer reads every swatch out of it — RGB, CMYK, LAB, and grayscale colors are all
+converted to HEX/RGB — and builds a Swatch/Name/HEX/RGB table on that page automatically, no
+manual table-writing needed. The `.ase` file also stays downloadable as-is. Re-running the
+importer with an updated `.ase` regenerates that table in place rather than duplicating it,
+so it's safe to swap in a revised swatch file at any time.
+
+A subfolder inside `download/` (rather than a loose file) is treated as one asset kit and
+zipped into a single download — e.g. `download/logo/` containing dozens of format/variant
+files becomes one "Logo.zip" button instead of dozens of individual ones. Requires the
+system `zip` command (present by default on macOS and most Linux setups).
+
+Three safety rules make this repeatable as a project fills in over time: a page's body is
 only replaced if you've provided a matching `.md` file (pages without one keep their current
-content), and a page's downloads are only replaced if its `download/` folder has files in it.
+content), a page's downloads are only replaced if its `download/` folder has files in it, and
+a color table built from an `.ase` file only replaces a table that was itself built the same
+way — a hand-written table you added directly in `pages.json` won't be touched.
 Running the importer again later, once more material exists, only touches what's new.
 
 ## Deploy for free, on your own account (with a real custom domain)

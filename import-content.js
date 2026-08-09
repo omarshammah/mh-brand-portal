@@ -50,6 +50,12 @@
 //     own content/ folder; it's copied into assets/images/ automatically. (Video
 //     files can live in content/ too, but aren't auto-embedded yet — link them as a
 //     download, or use an "embed" block in pages.json for a hosted video URL.)
+//   - Any .ase (Adobe Swatch Exchange) file dropped into a page's download/ folder
+//     is parsed automatically and turned into a Swatch/Name/HEX/RGB table on that
+//     page — this is how the Color Palette page's table gets built, no manual
+//     table-writing needed. The .ase file is also still copied through as its own
+//     downloadable file. Re-running the importer with an updated .ase regenerates
+//     the table in place (it's tracked separately from any hand-written table).
 
 const fs = require("fs");
 const path = require("path");
@@ -190,6 +196,115 @@ function listFilesRecursive(dir, relPrefix = "") {
   return out;
 }
 
+// --- ASE (Adobe Swatch Exchange) -> color table ---------------------------------
+//
+// Binary format: "ASEF" signature, version (4 bytes, unused here), block count
+// (uint32 BE), then a stream of blocks. We only care about color-entry blocks
+// (type 0x0001); group start/end blocks (0xc001/0xc002) are skipped over via
+// the block-length field, which flattens any grouping — fine for a flat table.
+
+function readUtf16BEString(buffer, offset, numChars) {
+  let str = "";
+  for (let i = 0; i < numChars; i++) {
+    const code = buffer.readUInt16BE(offset + i * 2);
+    if (code === 0) continue; // trailing null terminator
+    str += String.fromCharCode(code);
+  }
+  return str;
+}
+
+// CIE L*a*b* (D65) -> sRGB, standard conversion, used for LAB swatches.
+function labToRgb(L, a, b) {
+  let y = (L + 16) / 116;
+  let x = a / 500 + y;
+  let z = y - b / 200;
+  const finv = (t) => (Math.pow(t, 3) > 0.008856 ? Math.pow(t, 3) : (t - 16 / 116) / 7.787);
+  x = finv(x) * 95.047;
+  y = finv(y) * 100.0;
+  z = finv(z) * 108.883;
+  x /= 100;
+  y /= 100;
+  z /= 100;
+  let r = x * 3.2406 + y * -1.5372 + z * -0.4986;
+  let g = x * -0.9689 + y * 1.8758 + z * 0.0415;
+  let bl = x * 0.0557 + y * -0.204 + z * 1.057;
+  const gamma = (c) => (c > 0.0031308 ? 1.055 * Math.pow(c, 1 / 2.4) - 0.055 : 12.92 * c);
+  r = gamma(r);
+  g = gamma(g);
+  bl = gamma(bl);
+  const clamp = (c) => Math.max(0, Math.min(255, Math.round(c * 255)));
+  return [clamp(r), clamp(g), clamp(bl)];
+}
+
+function toHex(rgb) {
+  return "#" + rgb.map((v) => v.toString(16).padStart(2, "0").toUpperCase()).join("");
+}
+
+function parseASE(buffer) {
+  if (buffer.length < 12 || buffer.toString("ascii", 0, 4) !== "ASEF") {
+    throw new Error("not a valid .ase file (missing ASEF signature)");
+  }
+  const numBlocks = buffer.readUInt32BE(8);
+  let offset = 12;
+  const swatches = [];
+  for (let i = 0; i < numBlocks && offset + 6 <= buffer.length; i++) {
+    const blockType = buffer.readUInt16BE(offset);
+    const blockLength = buffer.readUInt32BE(offset + 2);
+    const blockStart = offset + 6;
+    if (blockType === 0x0001) {
+      let p = blockStart;
+      const nameLen = buffer.readUInt16BE(p);
+      p += 2;
+      const name = readUtf16BEString(buffer, p, nameLen).trim();
+      p += nameLen * 2;
+      const model = buffer.toString("ascii", p, p + 4).trim();
+      p += 4;
+      let rgb = null;
+      if (model === "RGB") {
+        const r = buffer.readFloatBE(p);
+        p += 4;
+        const g = buffer.readFloatBE(p);
+        p += 4;
+        const b = buffer.readFloatBE(p);
+        p += 4;
+        rgb = [r, g, b].map((v) => Math.max(0, Math.min(255, Math.round(v * 255))));
+      } else if (model === "CMYK") {
+        const c = buffer.readFloatBE(p);
+        p += 4;
+        const m = buffer.readFloatBE(p);
+        p += 4;
+        const y = buffer.readFloatBE(p);
+        p += 4;
+        const k = buffer.readFloatBE(p);
+        p += 4;
+        rgb = [
+          Math.round(255 * (1 - c) * (1 - k)),
+          Math.round(255 * (1 - m) * (1 - k)),
+          Math.round(255 * (1 - y) * (1 - k)),
+        ];
+      } else if (model === "LAB") {
+        const L = buffer.readFloatBE(p);
+        p += 4;
+        const A = buffer.readFloatBE(p);
+        p += 4;
+        const B = buffer.readFloatBE(p);
+        p += 4;
+        rgb = labToRgb(L, A, B);
+      } else if (model === "Gray" || model === "GRAY") {
+        const g = buffer.readFloatBE(p);
+        p += 4;
+        const v = Math.round(g * 255);
+        rgb = [v, v, v];
+      }
+      if (rgb && name) {
+        swatches.push({ name, rgb, hex: toHex(rgb) });
+      }
+    }
+    offset = blockStart + blockLength;
+  }
+  return swatches;
+}
+
 function copyImageFactory(destImagesDir) {
   return function copyImage(rawSrc, sourceDir, destPrefix, uniquePrefix) {
     const srcPath = path.join(sourceDir, rawSrc);
@@ -294,6 +409,40 @@ function main() {
             page.downloads = downloads;
             downloadsUpdated++;
             console.log(`  downloads: ${category.slug}/${page.slug}/download/ -> ${downloads.length} item(s)`);
+          }
+
+          // Any .ase swatch library dropped in download/ auto-builds a color
+          // table on this page — no hand-written table needed.
+          const aseFiles = entries.filter((e) => e.isFile() && /\.ase$/i.test(e.name));
+          if (aseFiles.length) {
+            let swatches = [];
+            for (const f of aseFiles) {
+              try {
+                const buf = fs.readFileSync(path.join(downloadsDir, f.name));
+                swatches = swatches.concat(parseASE(buf));
+              } catch (err) {
+                console.warn(`  ! couldn't parse ${category.slug}/${page.slug}/download/${f.name}: ${err.message}`);
+              }
+            }
+            if (swatches.length) {
+              const table = {
+                type: "table",
+                source: "ase",
+                headers: ["Swatch", "Name", "HEX", "RGB"],
+                rows: swatches.map((s) => [
+                  `<span class="swatch-dot" style="background:${s.hex}"></span>`,
+                  s.name,
+                  s.hex,
+                  s.rgb.join(", "),
+                ]),
+              };
+              if (!Array.isArray(page.body)) page.body = [];
+              const existingIdx = page.body.findIndex((b) => b.type === "table" && b.source === "ase");
+              if (existingIdx >= 0) page.body[existingIdx] = table;
+              else page.body.push(table);
+              pagesUpdated++;
+              console.log(`  color palette: ${category.slug}/${page.slug}/download/*.ase -> ${swatches.length} swatch(es)`);
+            }
           }
         }
       }
