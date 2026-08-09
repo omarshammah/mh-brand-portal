@@ -375,8 +375,8 @@ table.content-table {
 }
 table.content-table th {
   text-align: left;
-  background: var(--muted);
-  color: #fff;
+  background: #E9E9E9;
+  color: #000;
   padding: 10px 12px;
   font-weight: 400;
 }
