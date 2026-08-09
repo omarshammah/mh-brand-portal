@@ -260,6 +260,7 @@ function parseASE(buffer) {
       const model = buffer.toString("ascii", p, p + 4).trim();
       p += 4;
       let rgb = null;
+      let cmyk = null; // raw 0-1 floats, kept separately from the RGB used for HEX/RGB columns
       if (model === "RGB") {
         const r = buffer.readFloatBE(p);
         p += 4;
@@ -277,6 +278,7 @@ function parseASE(buffer) {
         p += 4;
         const k = buffer.readFloatBE(p);
         p += 4;
+        cmyk = [c, m, y, k];
         rgb = [
           Math.round(255 * (1 - c) * (1 - k)),
           Math.round(255 * (1 - m) * (1 - k)),
@@ -297,7 +299,7 @@ function parseASE(buffer) {
         rgb = [v, v, v];
       }
       if (rgb && name) {
-        swatches.push({ name, rgb, hex: toHex(rgb) });
+        swatches.push({ name, model, rgb, cmyk, hex: toHex(rgb) });
       }
     }
     offset = blockStart + blockLength;
@@ -412,36 +414,63 @@ function main() {
           }
 
           // Any .ase swatch library dropped in download/ auto-builds a color
-          // table on this page — no hand-written table needed.
-          const aseFiles = entries.filter((e) => e.isFile() && /\.ase$/i.test(e.name));
+          // table on this page — no hand-written table needed. Swatches are
+          // merged by NAME across every .ase file present, so e.g. a
+          // "Palette-RGB.ase" and a "Palette-CMYK.ase" with matching swatch
+          // names combine into one row per color: RGB and HEX come from the
+          // RGB-model swatch, CMYK comes from the CMYK-model swatch, rather
+          // than converting one to the other (which would drift/round).
+          const aseFiles = entries.filter((e) => e.isFile() && /\.ase$/i.test(e.name)).sort((a, b) => a.name.localeCompare(b.name));
           if (aseFiles.length) {
-            let swatches = [];
+            const byName = new Map();
+            let order = 0;
             for (const f of aseFiles) {
               try {
                 const buf = fs.readFileSync(path.join(downloadsDir, f.name));
-                swatches = swatches.concat(parseASE(buf));
+                for (const s of parseASE(buf)) {
+                  let entry = byName.get(s.name);
+                  if (!entry) {
+                    entry = { name: s.name, order: order++ };
+                    byName.set(s.name, entry);
+                  }
+                  if (s.model === "RGB") {
+                    entry.rgb = s.rgb;
+                  } else if (s.model === "CMYK") {
+                    entry.cmyk = s.cmyk;
+                    if (!entry.rgb) entry.rgb = s.rgb; // fallback if no RGB-model entry ever shows up for this name
+                  } else if (!entry.rgb) {
+                    entry.rgb = s.rgb; // LAB/Gray fallback
+                  }
+                }
               } catch (err) {
                 console.warn(`  ! couldn't parse ${category.slug}/${page.slug}/download/${f.name}: ${err.message}`);
               }
             }
-            if (swatches.length) {
+            const merged = [...byName.values()].sort((a, b) => a.order - b.order);
+            if (merged.length) {
               const table = {
                 type: "table",
                 source: "ase",
-                headers: ["Swatch", "Name", "HEX", "RGB"],
-                rows: swatches.map((s) => [
-                  `<span class="swatch-dot" style="background:${s.hex}"></span>`,
-                  s.name,
-                  s.hex,
-                  s.rgb.join(", "),
-                ]),
+                headers: ["Swatch", "Name", "HEX", "RGB", "CMYK", "Pantone"],
+                rows: merged.map((e) => {
+                  const hex = toHex(e.rgb);
+                  const cmykText = e.cmyk ? e.cmyk.map((v) => Math.round(v * 100)).join(", ") : "";
+                  return [
+                    `<span class="swatch-dot" style="background:${hex}"></span>`,
+                    e.name,
+                    hex,
+                    e.rgb.join(", "),
+                    cmykText,
+                    "",
+                  ];
+                }),
               };
               if (!Array.isArray(page.body)) page.body = [];
               const existingIdx = page.body.findIndex((b) => b.type === "table" && b.source === "ase");
               if (existingIdx >= 0) page.body[existingIdx] = table;
               else page.body.push(table);
               pagesUpdated++;
-              console.log(`  color palette: ${category.slug}/${page.slug}/download/*.ase -> ${swatches.length} swatch(es)`);
+              console.log(`  color palette: ${category.slug}/${page.slug}/download/*.ase -> ${merged.length} swatch(es)`);
             }
           }
         }

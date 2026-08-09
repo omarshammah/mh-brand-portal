@@ -375,7 +375,7 @@ table.content-table {
 }
 table.content-table th {
   text-align: left;
-  background: var(--primary);
+  background: var(--muted);
   color: #fff;
   padding: 10px 12px;
   font-weight: 400;
@@ -383,9 +383,6 @@ table.content-table th {
 table.content-table td {
   padding: 10px 12px;
   border-bottom: 1px solid #BEBEBE;
-}
-table.content-table tr:nth-child(even) td {
-  background: var(--light);
 }
 .swatch-dot {
   display: inline-block;
