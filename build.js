@@ -21,6 +21,16 @@ function pagesFor(categoryId, pages) {
   return pages.filter((p) => p.categoryId === categoryId);
 }
 
+// Nav/sidebar links display sentence case ("Logo system") regardless of how
+// the title is cased in data/pages.json ("Logo System") — everywhere else
+// (page <h1>, <title>, category cards) keeps the title's original casing.
+// Done here in JS rather than via CSS text-transform + ::first-letter because
+// the nav/sidebar links are display:flex, and ::first-letter doesn't apply to
+// flex containers in any browser.
+function toSentenceCase(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
 // Where a navbar category link should actually land: straight on that
 // category's first subpage (by `order`) rather than the card-grid overview,
 // so clicking "Brand Guidelines" opens "Logo System" immediately. Falls back
@@ -66,13 +76,13 @@ function navHtml(categories, pages, activeCategoryId, activePageId, rel) {
       const subpages = pagesFor(c.id, pages)
         .map((p) => {
           const isActivePage = p.id === activePageId;
-          return `<a href="${rel}${c.slug}/${p.slug}/index.html" class="${isActivePage ? "active" : ""}">${p.title}</a>`;
+          return `<a href="${rel}${c.slug}/${p.slug}/index.html" class="${isActivePage ? "active" : ""}">${toSentenceCase(p.title)}</a>`;
         })
         .join("\n            ");
       return `<div class="nav-item">
-        <a href="${catUrl}" class="nav-cat-link ${isActiveCat ? "active" : ""}">${c.name}</a>
+        <a href="${catUrl}" class="nav-cat-link ${isActiveCat ? "active" : ""}">${toSentenceCase(c.name)}</a>
         <details class="nav-cat-accordion" name="nav-cat-accordion" ${isActiveCat ? "open" : ""}>
-          <summary class="nav-cat-toggle-label ${isActiveCat ? "active" : ""}">${c.name}</summary>
+          <summary class="nav-cat-toggle-label ${isActiveCat ? "active" : ""}">${toSentenceCase(c.name)}</summary>
           <div class="nav-subpages">
             ${subpages}
           </div>
@@ -80,12 +90,8 @@ function navHtml(categories, pages, activeCategoryId, activePageId, rel) {
       </div>`;
     })
     .join("\n      ");
-  // Client logo sits next to the studio logo — swap
-  // assets/images/client-logo.svg in and it'll replace this placeholder box
-  // automatically (see README).
   const logoBlock = `<div class="logo-wrapper">
       <a href="${rel}index.html" class="logo"><img src="${rel}assets/images/logo.svg" alt="Logo" class="navbar-logo" /></a>
-      <div class="client-logo-placeholder">Client Logo</div>
       </div>`;
   // Below the tablet breakpoint (991px, matching omarshammah.com's own
   // tablet cutoff) the inline links no longer fit, so they collapse behind a
@@ -110,7 +116,7 @@ function sidebarHtml(category, pages, activePageId, rel) {
   const items = pagesFor(category.id, pages)
     .map(
       (p) =>
-        `<li><a href="${rel}${p.slug}/index.html" class="${p.id === activePageId ? "active" : ""}">${p.title}</a></li>`
+        `<li><a href="${rel}${p.slug}/index.html" class="${p.id === activePageId ? "active" : ""}">${toSentenceCase(p.title)}</a></li>`
     )
     .join("\n        ");
   return `<h2>${category.name}</h2>\n      <ul>\n        ${items}\n      </ul>`;
@@ -183,13 +189,16 @@ function renderBody(body) {
 // grey (the site's default link color); the studio site link is the only
 // one styled black, via .footer-link-primary.
 function footerHtml(brand, rel) {
-  return `<span>${brand.clientName} — Brand Portal · internal reference, not for external distribution</span>
-    <div class="footer-links">
-      <a href="${rel}imprint/index.html">Imprint</a>
-      <a href="${rel}privacy-policy/index.html">Privacy Policy</a>
-      <a href="${rel}cookie-policy/index.html">Cookie Policy</a>
-      <a href="https://www.omarshammah.com" target="_blank" rel="noopener" class="footer-link-primary">omarshammah.com</a>
-    </div>`;
+  return `<div class="footer-main">
+      <span>${brand.clientName} — Brand Portal · internal reference, not for external distribution</span>
+      <div class="footer-links">
+        <a href="${rel}imprint/index.html">Imprint</a>
+        <a href="${rel}privacy-policy/index.html">Privacy Policy</a>
+        <a href="${rel}cookie-policy/index.html">Cookie Policy</a>
+        <a href="https://www.omarshammah.com" target="_blank" rel="noopener" class="footer-link-primary">omarshammah.com</a>
+      </div>
+    </div>
+    <div class="footer-contact">for questions and inquiries: hey@omarshammah.com</div>`;
 }
 
 // Shared <head> extras that fight the "glitch on navigation" symptom: a

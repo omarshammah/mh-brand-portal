@@ -19,25 +19,6 @@
     "downloads": []
   },
   {
-    "id": "mission-vision",
-    "slug": "mission-and-vision",
-    "title": "Our Mission and Vision",
-    "categoryId": "brand",
-    "order": 2,
-    "summary": "Mission statement, vision statement, and guiding principles.",
-    "body": [
-      {
-        "type": "p",
-        "text": "Placeholder — replace with your real content. State the mission (what we do today) and the vision (the future we're working toward) as two distinct, quotable lines."
-      },
-      {
-        "type": "p",
-        "text": "Follow with 3–5 guiding principles that explain how decisions get made when the mission and vision aren't enough on their own."
-      }
-    ],
-    "downloads": []
-  },
-  {
     "id": "brand-dna",
     "slug": "our-brand-dna",
     "title": "Our Brand DNA",

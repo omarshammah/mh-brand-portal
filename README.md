@@ -31,16 +31,11 @@ Everything lives in three files under `data/`:
 
 Edit those, then re-run `node build.js`. No dependencies to install.
 
-### Navbar logos (studio + client)
+### Navbar logo
 
-The navbar shows the studio logo (`assets/images/logo.svg`) next to a dashed
-placeholder box that reads "Client Logo". Once you have the client's actual
-logo file:
-
-1. Drop it in as `assets/images/client-logo.svg` (or `.png`).
-2. In `build.js`, inside `navHtml()`, replace the `<div class="client-logo-placeholder">Client Logo</div>`
-   line with `<img src="${rel}assets/images/client-logo.svg" alt="Client logo" class="navbar-logo" />`.
-3. Re-run `node build.js`.
+The navbar shows a single logo, `assets/images/logo.svg`. Replace that file (or drop a
+`logo.svg` at the top level of a Brand-Portal content folder — see "Import content from a
+project folder" below, it gets copied in automatically) and re-run `node build.js`.
 
 ### Content blocks (text, tables, images, embedded slides)
 
@@ -100,8 +95,8 @@ Brand-Portal/
       who-we-are.md              <- 3rd level: becomes the "Who We Are" page body
       content/                   <- 3rd level: photos/videos referenced from the .md
       download/                  <- 3rd level: any files here become that page's downloads
-    mission-and-vision/
-      mission-and-vision.md
+    our-brand-dna/
+      our-brand-dna.md
       content/
       download/
     ...
