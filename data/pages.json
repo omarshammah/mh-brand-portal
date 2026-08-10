@@ -382,39 +382,17 @@
     "body": [
       {
         "type": "p",
-        "text": "Placeholder — replace with your real content. List primary and secondary colors with HEX, RGB, CMYK, and Pantone values, plus recommended usage ratios (e.g. 60/30/10)."
+        "text": "Unsere Farbpalette widerspiegelt unsere Tonalität, indem sie überwiegend hell und klar ist."
       },
       {
-        "type": "table",
-        "headers": [
-          "Swatch",
-          "Name",
-          "HEX",
-          "RGB",
-          "Usage"
-        ],
-        "rows": [
-          [
-            "■",
-            "Primary Navy",
-            "#1F2A44",
-            "31, 42, 68",
-            "Backgrounds, headlines"
-          ],
-          [
-            "■",
-            "Accent Blue",
-            "#3B5BFE",
-            "59, 91, 254",
-            "CTAs, links, highlights"
-          ],
-          [
-            "■",
-            "Light Gray",
-            "#F2F3F7",
-            "242, 243, 247",
-            "Section backgrounds"
-          ]
+        "type": "p",
+        "text": "Je nach Zweck, benutzen wir entweder die MH oder die MA Palette."
+      },
+      {
+        "type": "list",
+        "items": [
+          "MH ist die primäre Palette für die Praxis.",
+          "MA ist die primäre Palette für Concepts."
         ]
       },
       {
