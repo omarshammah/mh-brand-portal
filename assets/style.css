@@ -513,7 +513,23 @@ footer a.footer-link-primary {
 .footer-contact {
   border-top: 1px solid #BEBEBE;
   padding: 14px 0;
-  text-align: center;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer-contact .footer-contact-btn {
+  display: inline-block;
+  background: var(--text); /* black */
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 100vw;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+.footer-contact .footer-contact-btn:hover {
+  opacity: 0.8;
+  text-decoration: none;
 }
 
 /* Legal pages (Imprint, Privacy Policy, Cookie Policy) skip the sidebar
@@ -716,7 +732,7 @@ footer a.footer-link-primary {
     padding: 20px 0;
   }
   .footer-contact {
-    text-align: left;
+    flex-wrap: wrap;
   }
   .footer-links {
     flex-wrap: wrap;

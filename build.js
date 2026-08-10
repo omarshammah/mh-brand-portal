@@ -198,7 +198,7 @@ function footerHtml(brand, rel) {
         <a href="https://www.omarshammah.com" target="_blank" rel="noopener" class="footer-link-primary">omarshammah.com</a>
       </div>
     </div>
-    <div class="footer-contact">for questions and inquiries: hey@omarshammah.com</div>`;
+    <div class="footer-contact">for questions and inquiries: <a href="mailto:hey@omarshammah.com" class="footer-contact-btn">hey@omarshammah.com</a></div>`;
 }
 
 // Shared <head> extras that fight the "glitch on navigation" symptom: a
