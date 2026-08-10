@@ -321,6 +321,20 @@ a { color: inherit; text-decoration: none; }
   font-size: 14px;
   color: #6B4E00;
 }
+/* Only Regular (400) and Light (300) are loaded site-wide (see the h1/h2/h3/th
+   comment near the top), so **bold** text steps up to Regular + a darker color
+   rather than a synthetic heavy weight the browser would have to fake. */
+.content strong {
+  font-weight: 400;
+  color: var(--text);
+}
+/* ==highlighted text== */
+.content mark {
+  background: #FFF3B0;
+  color: inherit;
+  padding: 0 3px;
+  border-radius: 2px;
+}
 /* Inline links written into paragraphs, list items, or table cells — e.g.
    cross-references to another page (see README for the [text](url) syntax). */
 .content p a,

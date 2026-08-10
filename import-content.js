@@ -45,11 +45,13 @@
 //     treated as one asset kit and zipped into a single .zip download (e.g.
 //     download/logo/ with dozens of format/variant files becomes one
 //     "Logo.zip" button) — requires the system `zip` command.
-//   - Markdown supports: paragraphs, "## " subheadings, "- " bullet lists, pipe
-//     tables, and ![alt](file.png) images — the image file must sit in that page's
-//     own content/ folder; it's copied into assets/images/ automatically. (Video
-//     files can live in content/ too, but aren't auto-embedded yet — link them as a
-//     download, or use an "embed" block in pages.json for a hosted video URL.)
+//   - Markdown supports: paragraphs, "## " and "### " subheadings, "- " bullet lists,
+//     pipe tables, and ![alt](file.png) images — the image file must sit in that
+//     page's own content/ folder; it's copied into assets/images/ automatically.
+//     (Video files can live in content/ too, but aren't auto-embedded yet — link
+//     them as a download, or use an "embed" block in pages.json for a hosted video
+//     URL.) Inline formatting works inside paragraphs, headings, list items, and
+//     table cells: [text](url) links, **bold**, and ==highlighted==.
 //   - Any .ase (Adobe Swatch Exchange) file dropped into a page's download/ folder
 //     is parsed automatically and turned into a Swatch/Name/HEX/RGB table on that
 //     page — this is how the Color Palette page's table gets built, no manual
@@ -94,12 +96,14 @@ function titleCaseFromFilename(filename) {
 
 // --- Markdown -> content blocks -------------------------------------------------
 
-// Inline [link text](url) -> <a href="url">link text</a>, used inside paragraphs,
-// list items, and table cells to cross-reference other pages. `url` can be a
-// relative path to another page (see README for the exact "../../category/page/
-// index.html" pattern) or a normal http(s) URL.
-function applyInlineLinks(text) {
-  return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+// Inline formatting applied inside paragraphs, headings, list items, and table
+// cells: [link text](url) -> a link (see README's "Cross-references between
+// pages"), **bold text** -> bold, ==highlighted text== -> a yellow highlight.
+function applyInlineFormatting(text) {
+  return text
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/==([^=]+)==/g, "<mark>$1</mark>");
 }
 
 function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, copyImage }) {
@@ -109,7 +113,7 @@ function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, cop
 
   function flushParagraph() {
     if (paragraphBuf.length) {
-      blocks.push({ type: "p", text: applyInlineLinks(paragraphBuf.join(" ").trim()) });
+      blocks.push({ type: "p", text: applyInlineFormatting(paragraphBuf.join(" ").trim()) });
       paragraphBuf = [];
     }
   }
@@ -127,14 +131,14 @@ function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, cop
 
     if (line.startsWith("### ")) {
       flushParagraph();
-      blocks.push({ type: "h3", text: applyInlineLinks(line.slice(4).trim()) });
+      blocks.push({ type: "h3", text: applyInlineFormatting(line.slice(4).trim()) });
       i++;
       continue;
     }
 
     if (line.startsWith("## ")) {
       flushParagraph();
-      blocks.push({ type: "h2", text: applyInlineLinks(line.slice(3).trim()) });
+      blocks.push({ type: "h2", text: applyInlineFormatting(line.slice(3).trim()) });
       i++;
       continue;
     }
@@ -157,7 +161,7 @@ function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, cop
       flushParagraph();
       const items = [];
       while (i < lines.length && /^[-*]\s+/.test(lines[i].trim())) {
-        items.push(applyInlineLinks(lines[i].trim().replace(/^[-*]\s+/, "")));
+        items.push(applyInlineFormatting(lines[i].trim().replace(/^[-*]\s+/, "")));
         i++;
       }
       blocks.push({ type: "list", items });
@@ -171,7 +175,7 @@ function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, cop
         i++;
       }
       const cellsOf = (l) =>
-        l.replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => applyInlineLinks(c.trim()));
+        l.replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => applyInlineFormatting(c.trim()));
       if (tableLines.length >= 1) {
         const headers = cellsOf(tableLines[0]);
         const isSeparator = (l) => /^[\s:|-]+$/.test(l);

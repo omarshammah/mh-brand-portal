@@ -148,6 +148,10 @@ and gets copied into `assets/images/` automatically — and `[link text](url)` l
 auto-embedded into the page yet — link them as a download instead, or use an `embed` block in
 `pages.json` for a hosted video URL.)
 
+Inline formatting works inside paragraphs, headings, list items, and table cells:
+`**bold text**` for bold, and `==highlighted text==` for a yellow highlight. Both can be used
+in the same sentence, e.g. `Always ==lead with the benefit==, never the **feature**.`
+
 ### Cross-references between pages
 
 Write a normal markdown link — `[tone of voice](../../brand/our-tone-of-voice/index.html)` —
