@@ -99,21 +99,48 @@ function titleCaseFromFilename(filename) {
 // Inline formatting applied inside paragraphs, headings, list items, and table
 // cells: [link text](url) -> a link (see README's "Cross-references between
 // pages"), **bold text** -> bold, ==highlighted text== -> a yellow highlight.
-function applyInlineFormatting(text) {
+// `resolveLink`, if given, gets first crack at rewriting a link's URL — used to
+// auto-fix cross-page links that forgot the "../../" prefix (see resolveLink
+// factory below).
+function applyInlineFormatting(text, resolveLink) {
   return text
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, url) => `<a href="${resolveLink ? resolveLink(url) : url}">${label}</a>`)
     .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
     .replace(/==([^=]+)==/g, "<mark>$1</mark>");
 }
 
-function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, copyImage }) {
+// Builds a resolveLink(url) function that recognizes a plain "<category-slug>/
+// <page-slug>" link (with or without a trailing "/index.html") that's missing
+// its "../../" prefix — an easy mistake since every page sits two folders deep
+// — and rewrites it to the correct relative path. Only touches links that
+// exactly match a real category/page slug pair; anything else (already-correct
+// "../../..." links, http(s) URLs, "#anchor", "mailto:") passes through as-is.
+function makeResolveLink(categories, pages) {
+  const known = new Set();
+  for (const p of pages) {
+    const cat = categories.find((c) => c.id === p.categoryId);
+    if (cat) known.add(`${cat.slug}/${p.slug}`);
+  }
+  return function resolveLink(url) {
+    if (/^([a-z][a-z0-9+.-]*:)?\/\//i.test(url) || /^(mailto:|#)/i.test(url) || url.startsWith("../") || url.startsWith("/")) {
+      return url;
+    }
+    const m = url.match(/^([a-z0-9-]+)\/([a-z0-9-]+)\/?(?:index\.html)?$/i);
+    if (m && known.has(`${m[1]}/${m[2]}`)) {
+      return `../../${m[1]}/${m[2]}/index.html`;
+    }
+    return url;
+  };
+}
+
+function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, copyImage, resolveLink }) {
   const lines = md.replace(/\r\n/g, "\n").split("\n");
   const blocks = [];
   let paragraphBuf = [];
 
   function flushParagraph() {
     if (paragraphBuf.length) {
-      blocks.push({ type: "p", text: applyInlineFormatting(paragraphBuf.join(" ").trim()) });
+      blocks.push({ type: "p", text: applyInlineFormatting(paragraphBuf.join(" ").trim(), resolveLink) });
       paragraphBuf = [];
     }
   }
@@ -129,16 +156,14 @@ function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, cop
       continue;
     }
 
-    if (line.startsWith("### ")) {
+    // "## " / "### " subheadings — lenient about a missing space after the
+    // hashes ("##Heading") and an optional trailing "###" decoration
+    // ("### Heading ###"), both easy mistakes in a plain text editor.
+    const headingMatch = line.match(/^(#{2,3})\s*(.*?)\s*#*$/);
+    if (headingMatch && headingMatch[2]) {
       flushParagraph();
-      blocks.push({ type: "h3", text: applyInlineFormatting(line.slice(4).trim()) });
-      i++;
-      continue;
-    }
-
-    if (line.startsWith("## ")) {
-      flushParagraph();
-      blocks.push({ type: "h2", text: applyInlineFormatting(line.slice(3).trim()) });
+      const level = headingMatch[1].length;
+      blocks.push({ type: level === 3 ? "h3" : "h2", text: applyInlineFormatting(headingMatch[2], resolveLink) });
       i++;
       continue;
     }
@@ -161,7 +186,7 @@ function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, cop
       flushParagraph();
       const items = [];
       while (i < lines.length && /^[-*]\s+/.test(lines[i].trim())) {
-        items.push(applyInlineFormatting(lines[i].trim().replace(/^[-*]\s+/, "")));
+        items.push(applyInlineFormatting(lines[i].trim().replace(/^[-*]\s+/, ""), resolveLink));
         i++;
       }
       blocks.push({ type: "list", items });
@@ -175,7 +200,7 @@ function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, cop
         i++;
       }
       const cellsOf = (l) =>
-        l.replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => applyInlineFormatting(c.trim()));
+        l.replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => applyInlineFormatting(c.trim(), resolveLink));
       if (tableLines.length >= 1) {
         const headers = cellsOf(tableLines[0]);
         const isSeparator = (l) => /^[\s:|-]+$/.test(l);
@@ -352,6 +377,7 @@ function main() {
 
   const imagesDestDir = path.join(ROOT, "assets/images");
   const copyImage = copyImageFactory(imagesDestDir);
+  const resolveLink = makeResolveLink(categories, pages);
 
   let pagesUpdated = 0;
   let downloadsUpdated = 0;
@@ -374,6 +400,7 @@ function main() {
           imageDestPrefix: "../../assets/images/",
           uniquePrefix: `${category.slug}-${page.slug}`,
           copyImage,
+          resolveLink,
         });
         pagesUpdated++;
         console.log(`  content: ${category.slug}/${page.slug}/${page.slug}.md -> ${page.body.length} block(s)`);

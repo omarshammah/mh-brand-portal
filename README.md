@@ -173,6 +173,11 @@ tree (same ones you're placing `.md`/`content/`/`download/` inside), so you can 
 them by looking at the folder structure. A normal `https://...` URL works too, for linking
 out to something outside the site.
 
+If you forget the `../../` and just write `[tone of voice](brand/our-tone-of-voice/index.html)`,
+the importer recognizes it's pointing at a real page and fixes the path automatically — so it's
+not something to worry about getting exactly right, just get the `category-slug/page-slug`
+part correct and the importer does the rest.
+
 **Color palette from an .ase file**: drop an Adobe Swatch Exchange (`.ase`) file straight into
 a page's `download/` folder (works on any page, but this is built for Color Palette) and the
 importer reads every swatch out of it — RGB, CMYK, LAB, and grayscale colors are all

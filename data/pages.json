@@ -238,15 +238,62 @@
     "body": [
       {
         "type": "p",
-        "text": "Placeholder — replace with your real content. Specify primary and secondary typefaces, weights in use, type hierarchy (H1–body–caption), and web-safe fallback stacks."
+        "text": "Unsere Schriftart heißt Season von Displaay Type Foundary."
+      },
+      {
+        "type": "p",
+        "text": "Wie unsere Marke für die Verbundenheit zwischen Medizin und Heilkunst, für Körper und Seele, für Mensch und Natur steht, steht die Season Schriftart für Serifen, Sans-Serifen und den stufenlosen Übergang zwischen den beiden Stilen. Sie verleiht unserem Markenauftritt eine gewisse Seriosität aber gleichzeitig auch Zugänglichkeit. Sie vereint kompromisslos die Moderne mit Tradition und Funktionalität mit Stil."
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-typography-mh-logosystemArtboard-7.jpg",
+        "alt": "Schriftarten"
+      },
+      {
+        "type": "p",
+        "text": "Für unser Logo und unsere Überschriften haben wir eine Variante definiert mit einem Gewicht von 520 Punkten und der Stufe 60 auf der Skala Serif-Sans. Diese Variante benutzen wir eher sparsam. Also für Logo, Überschriften und Statements. Für Fließtext und Untertitel verwenden wir die Season Sans Regular für angenehmere Lesbarkeit."
+      },
+      {
+        "type": "h2",
+        "text": "Hierarchie"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-typography-mh-logosystemArtboard-8.jpg",
+        "alt": "Schrift-Hierarchie"
+      },
+      {
+        "type": "p",
+        "text": "Wir verwenden einen 6er bzw. 12er Skalierungssystem. Das heißt die Größen der Absatzformate lassen sich durch 6 teilen. Der Zeilenabstand ist in der Regel 12 Punkte größer als die Schriftgröße. Das garantiert, dass unsere Texte genug Atemraum genießen für entspannteres Lesen."
+      },
+      {
+        "type": "p",
+        "text": "Bitte stets die unterschiedlichen Textgrößen beachten, je nach dem für welches Medium man gerade  gestaltet oder Texte einpflegt."
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-typography-mh-logosystemArtboard-9.jpg",
+        "alt": "Sonstige Regeln"
       },
       {
         "type": "list",
         "items": [
-          "Display / H1 — 34px, bold, Primary typeface",
-          "H2 — 22px, medium, Primary typeface",
-          "Body — 16px, regular, Secondary typeface",
-          "Caption — 13px, regular, Secondary typeface"
+          "Beim größten Format Heading H1 bzw. auf Titelseiten kommt ein Untertitel zuerst und die Überschrift folgt danach.",
+          "Für klarere Hierarchie, immer ein Format überspringen. Sprich, kombiniere Heading H1 und Heading H2 nicht. Stattdessen, H1 mit H3 und H2 mit H4.",
+          "Dient ein Format als Überschrift, nimmt man dafür die Season Mix. Dient es als Untertitel, nimmt man die Season Sans Regular.",
+          "Hat man eine Überschrift im Fließtext, die bloß den Beginn eines neuen Absatzes bezeichnen soll - aber kein neues Kapitel - darf sie im Fließtext Format mit Sans Mix gesetzt werden."
+        ]
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-typography-mh-logosystemArtboard-9.jpg",
+        "alt": "Anordnung"
+      },
+      {
+        "type": "list",
+        "items": [
+          "In der Regel sind unsere Texte immer linksbündig und wir benutzen keinen Blocksatz.",
+          "Statements dürfen ganz mit Season Mix geschrieben werden und zentriert gesetzt aber nicht mitten in einem linksbündigem Text."
         ]
       }
     ],
@@ -283,7 +330,129 @@
     "body": [
       {
         "type": "p",
-        "text": "Placeholder — replace with your real content. Show the grid system (columns, gutters, margins) at a couple of common sizes, plus 2–3 example layouts that demonstrate the spacing rules in practice."
+        "text": "Unser Layouting basiert auf einen wichtigen Wert - Die Logogröße."
+      },
+      {
+        "type": "p",
+        "text": "Die richtige Logogröße wird von der Designfläche selbst hergeleitet. Sie lässt sich so kalkulieren:"
+      },
+      {
+        "type": "p",
+        "text": "Diagonale Länge (L) wird durch 40 geteilt. Das Ergebnis ist die richtige Logogröße und die nennen wir (H). Also H=L/40"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-grids-and-layouts-mh-logosystemArtboard-19.jpg",
+        "alt": "Schriftarten"
+      },
+      {
+        "type": "p",
+        "text": "Für die gängigen DIN A Formate haben wir das Format DIN A4 als Standard genommen. Seine richtige Logogröße gilt auch für DIN A3 und DIN A5. Diese bträgt 9 mm. Für DIN A6 wird die Diagonale Länge des DIN A4s nun durch 60 geteilt."
+      },
+      {
+        "type": "p",
+        "text": "Da unser Logo einen Schutzraum braucht von einem (H) drumrum, nehmen wir den H-Wert auch um die Dicke der Seitenränder festzulegen."
+      },
+      {
+        "type": "h2",
+        "text": "Logogröße bei den gängigen Formaten"
+      },
+      {
+        "type": "list",
+        "items": [
+          "DIN A3: H = 9 mm",
+          "DIN A4: H = 9 mm",
+          "DIN A5: H = 9 mm",
+          "DIN A6: H = 6 mm"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Spalten und Gitter"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-grids-and-layouts-mh-logosystemArtboard-20.jpg",
+        "alt": "Spalten und Gitter"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-grids-and-layouts-mh-logosystemArtboard-23.jpg",
+        "alt": "Spalten und Gitter"
+      },
+      {
+        "type": "p",
+        "text": "Die Dicke vom Gitter beträgt immer H/2 Die Anzahl der Spalten ist immer eine ungerade Zahl."
+      },
+      {
+        "type": "p",
+        "text": "Die gängigsten Formate im Überblick"
+      },
+      {
+        "type": "table",
+        "headers": [
+          "Format",
+          "H",
+          "G",
+          "Spalten"
+        ],
+        "rows": [
+          [
+            "DIN A3",
+            "9 mm",
+            "4,5 mm",
+            "11"
+          ],
+          [
+            "DIN A4",
+            "9 mm",
+            "4,5 mm",
+            "9"
+          ],
+          [
+            "DIN A5",
+            "9 mm",
+            "4,5 mm",
+            "5"
+          ],
+          [
+            "DIN A6",
+            "6 mm",
+            "6 mm",
+            "5"
+          ],
+          [
+            "16:9 Landscape",
+            "H",
+            "G",
+            "15"
+          ],
+          [
+            "16:9 Portrait",
+            "H",
+            "G",
+            "5"
+          ],
+          [
+            "5:4 Portrait",
+            "H",
+            "G",
+            "5"
+          ]
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Sonstige Layouts"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-grids-and-layouts-mh-logosystemArtboard-24.jpg",
+        "alt": "Print Formate"
+      },
+      {
+        "type": "p",
+        "text": "Unsere Layouts vernachlässigen die Bedingungen ihrer Media nicht. Als Beispiel, die oberen und unteren Ränder einer Designfläche im Format 16:9 Portrait lassen sich anpassen, wenn dieses Design als Story oder Reel für Soziale Medien gedacht wird."
       }
     ],
     "downloads": []
@@ -299,6 +468,131 @@
       {
         "type": "p",
         "text": "Placeholder — replace with your real content. Cover house style rules (capitalization, punctuation, numerals), preferred/avoided terminology, and a short glossary of brand-specific terms."
+      },
+      {
+        "type": "p",
+        "text": "Dieses Kapitel hilft dabei, unser Schreibstil zu definieren. Das orientiert sich in erster Linie an unsere <a href=\"../../brand/our-tone-of-voice/index.html\">tone of voice</a>."
+      },
+      {
+        "type": "h2",
+        "text": "Tone of Voice in Schrift"
+      },
+      {
+        "type": "h3",
+        "text": "Hell"
+      },
+      {
+        "type": "p",
+        "text": "Sätze, die atmen. Formulierungen, die etwas öffnen statt schließen. Keine schweren Substantivketten, keine dunklen Diagnosesprache, keine Endgültigkeit. Stattdessen Sprache, die Möglichkeit lässt und andeutet, dass da mehr ist."
+      },
+      {
+        "type": "h3",
+        "text": "Klar"
+      },
+      {
+        "type": "p",
+        "text": "Klarheit lässt sich daher in der Sprache ziemlich einfach erklären. Wir benutzen möglichst eine verständliche Sprache, wenig Fachbegriffe, kurze Sätze, und erwähnen immer das wichtigste zuerst ohne komplizierte Einleitungen und Schachtelsätzen."
+      },
+      {
+        "type": "h3",
+        "text": "Tiefgründig"
+      },
+      {
+        "type": "p",
+        "text": "Es darf auch mal etwas philosophisch werden. Dabei die ersten zwei Aspekte unserer Tonalität stets bewahren. Das bedeutet, es darf nicht so philosophisch werden, dass wir besserwisserisch, distanziert oder zu abstrakt kommunizieren und die Wärme verlieren. Oder so dass wir Gedanken zu sehr vertiefen, dass sie nicht mehr klar und verständlich sind. Tiefe für uns ist also kein Selbstzweck. Sie dient dem Verständnis."
+      },
+      {
+        "type": "h3",
+        "text": "Ruhig"
+      },
+      {
+        "type": "p",
+        "text": "Unsere Sprache ist nie laut und aufdringlich. Wir benutzen keine Ausrufezeichen. Wir benutzen keine “Jetzt handeln” CTAs und keine Superlative."
+      },
+      {
+        "type": "h3",
+        "text": "Organisch als Unterton"
+      },
+      {
+        "type": "p",
+        "text": "Keine klinische oder distanzierte Sprache, sondern eine persönliche. mechanischen Metaphern. Keine Prozesse optimieren, Systeme aufbauen, Leistungen anbieten. Stattdessen Sprache, die wächst, fließt, atmet – begleiten, entfalten, verwurzeln, entstehen, usw."
+      },
+      {
+        "type": "h2",
+        "text": "In der Praxis"
+      },
+      {
+        "type": "p",
+        "text": "Hier sind ein paar Beispiele, wie man für unsere Marke nicht schreiben soll mit der Begründung und besseren alternativen Formulierungen."
+      },
+      {
+        "type": "p",
+        "text": "<strong>So nicht</strong>: Chronische Beschwerden im Bewegungsaparat erfordern eine differenzierte Diagnostik. (Substantivketten und Fachjargon) <strong>Lieber so</strong>: Anhaltende Beschwerden im Rücken oder in den Gelenken haben oft mehrere Ursachen. Wir schauen genau hin, um sie zu verstehen.\""
+      },
+      {
+        "type": "p",
+        "text": "<strong>So nicht</strong>: Im Rahmen unseres interdisziplinären Behandlungsansatzes streben wir danach, mittels einer synergetischen Verzahnung unterschiedlicher medizinischer Disziplinen eine ganzheitliche Versorgung sicherzustellen, die den individuellen Bedürfnissen unserer Patientinnen und Patienten gerecht wird. (Schachtelsatz. Der wichtige Punkt geht unter) <strong>Lieber so</strong>: Verschiedene Fachrichtungen, ein gemeinsamer Blick auf Sie. So entsteht eine Versorgung, die zu Ihnen passt."
+      },
+      {
+        "type": "p",
+        "text": "<mark>So nicht</mark>: Krankheit ist letztlich eine Metapher für das, was die Seele nicht aussprechen kann. (zu abstrakt und distanziert) <mark>Lieber so</mark>: Manche Beschwerden sprechen aus, was sich in Worten schwer sagen lässt."
+      },
+      {
+        "type": "p",
+        "text": "<mark>So nicht</mark>: Wie schon Hippokrates wusste: Der Mensch ist mehr als die Summe seiner Organe – eine Weisheit, die in der modernen, fragmentierten Medizin zunehmend verloren geht. (Zitat dient nur als Autoritätsbeweis, wirkt daher belehrend) <mark>Lieber so</mark>: Ein Mensch ist mehr als seine Befunde. Das vergisst man leicht, wenn man nur auf das Symptom schaut."
+      },
+      {
+        "type": "p",
+        "text": "<strong>So nicht</strong>: Wir optimieren Ihren Behandlungsprozess für maximale Effizienz. (mechanisch, klinisch) <strong>Lieber so</strong>: Hier wachsen Behandlungen zusammen, die sonst getrennt bleiben."
+      },
+      {
+        "type": "p",
+        "text": "<strong>So nicht</strong>: Die beste interdisziplinäre Praxis der Stadt! (Superlativ, laut) <strong>Lieber so</strong>: Ein Ort, der sich Zeit nimmt."
+      },
+      {
+        "type": "h2",
+        "text": "Styling Tipps"
+      },
+      {
+        "type": "h2",
+        "text": "Zeichensetzung"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Kein Ausrufezeichen. Kein Fragezeichen als rhetorischer Trick oder Verkaufsdruck – wenn, dann als echte, offene Frage.",
+          "Kein Semikolon. Es wirkt akademisch und bricht mit Klarheit – lieber zwei kurze Sätze.",
+          "Keine Klammern. Was wichtig ist, gehört in den Satz, nicht ins Beiwerk.",
+          "Keine Auslassungspunkte (...). Sie wirken vage, nicht offen.",
+          "Kein Großschreiben zur Betonung (KEINE GROSSBUCHSTABEN, kein Fett als Ausrufersatz)."
+        ]
+      },
+      {
+        "type": "h3",
+        "text": "Numerals"
+      },
+      {
+        "type": "list",
+        "items": [
+          "Konkrete, praktische Angaben in Ziffern: \"60 Minuten\", \"8 bis 18 Uhr\", \"2 Fachrichtungen\". Das ist klar, nicht kalt.",
+          "In reflektierten oder tiefgründigen Sätzen Zahlen ausschreiben, wenn sie kein Fakt, sondern Teil des Gedankens sind: \"ein Gespräch, zwei Perspektiven\" statt \"1 Gespräch, 2 Perspektiven\".",
+          "Keine Verknappung mit Zahlen (\"nur noch 3 Termine frei\"). Das erzeugt Druck, den wir nicht wollen.",
+          "Keine Rangfolgen (\"Nr. 1\", \"Platz 1 in der Region\")"
+        ]
+      },
+      {
+        "type": "h3",
+        "text": "zu vermeidende Begriffe"
+      },
+      {
+        "type": "list",
+        "items": [
+          "optimieren, Prozess, System, Effizienz, Leistung(en) anbieten",
+          "Patientenfall, Fall, Kunde, Anbieter, Dienstleistung",
+          "jetzt, sofort, garantiert, beste, einzigartig, revolutionär",
+          "heilen als Versprechen (\"Wir heilen Sie\") – Heilung als Möglichkeit andeuten, nie zusichern",
+          "Fachbegriffe oder lateinische Termini ohne unmittelbare, einfache Erklärung"
+        ]
       }
     ],
     "downloads": []
