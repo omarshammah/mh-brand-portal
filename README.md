@@ -173,14 +173,15 @@ the importer recognizes it's pointing at a real page and fixes the path automati
 not something to worry about getting exactly right, just get the `category-slug/page-slug`
 part correct and the importer does the rest.
 
-**Color palette from an .ase file**: drop an Adobe Swatch Exchange (`.ase`) file into a page's
-`download/` folder — or `content/`, both are checked, since it's an easy mix-up — (works on any
-page, but this is built for Color Palette) and the importer reads every swatch out of it — RGB,
-CMYK, LAB, and grayscale colors are all converted to HEX/RGB — and builds a Swatch/Name/HEX/
-RGB/CMYK/Pantone table on that page automatically, no manual table-writing needed. The `.ase`
-file also stays downloadable as its own button. Re-running the importer with an updated `.ase`
-regenerates that table in place rather than duplicating it, so it's safe to swap in a revised
-swatch file at any time.
+**Color palette from an .ase file**: drop an Adobe Swatch Exchange (`.ase`) file straight into
+a page's `download/` folder (works on any page, but this is built for Color Palette) and the
+importer reads every swatch out of it — RGB, CMYK, LAB, and grayscale colors are all
+converted to HEX/RGB — and builds a Swatch/Name/HEX/RGB/CMYK/Pantone table on that page
+automatically, no manual table-writing needed. The `.ase` file also stays downloadable as its
+own button. Re-running the importer with an updated `.ase` regenerates that table in place
+rather than duplicating it, so it's safe to swap in a revised swatch file at any time.
+`content/` is reserved for photos/videos referenced from the `.md` file — `.ase` files that
+end up there aren't picked up, so keep them in `download/`.
 
 If you export separate RGB and CMYK swatch files for the same colors (see "Fill in a page"
 above), give matching swatches the exact same name in both files — the importer merges them

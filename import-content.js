@@ -457,30 +457,25 @@ function main() {
         }
       }
 
-      // Any .ase swatch library auto-builds a color table on this page — no
-      // hand-written table needed. Swatches are merged by NAME across every
-      // .ase file found, so e.g. a "Palette-RGB.ase" and a "Palette-CMYK.ase"
-      // with matching swatch names combine into one row per color: RGB and
-      // HEX come from the RGB-model swatch, CMYK from the CMYK-model swatch,
-      // rather than converting one to the other (which would drift/round).
-      //
-      // Looked for in BOTH download/ and content/ — content/ is an easy place
-      // to drop it by mistake (it's also where other reference material like
-      // images lives), so both are checked rather than silently doing nothing
-      // if it's in the "wrong" one. A file already handled by the download/
-      // loop above isn't re-copied; one found only in content/ gets copied
-      // into the downloads folder and added as its own download button too.
+      // Any .ase swatch library dropped in download/ auto-builds a color
+      // table on this page — no hand-written table needed. Swatches are
+      // merged by NAME across every .ase file present, so e.g. a
+      // "Palette-RGB.ase" and a "Palette-CMYK.ase" with matching swatch
+      // names combine into one row per color: RGB and HEX come from the
+      // RGB-model swatch, CMYK from the CMYK-model swatch, rather than
+      // converting one to the other (which would drift/round). content/ is
+      // NOT scanned — it's reserved for photos/videos referenced from the
+      // .md file, .ase files belong in download/.
       const byName = new Map();
       let order = 0;
-      for (const aseDir of [downloadsDir, contentDir]) {
-        if (!fs.existsSync(aseDir) || !fs.statSync(aseDir).isDirectory()) continue;
+      if (fs.existsSync(downloadsDir) && fs.statSync(downloadsDir).isDirectory()) {
         const aseFiles = fs
-          .readdirSync(aseDir, { withFileTypes: true })
+          .readdirSync(downloadsDir, { withFileTypes: true })
           .filter((e) => e.isFile() && /\.ase$/i.test(e.name))
           .sort((a, b) => a.name.localeCompare(b.name));
         for (const f of aseFiles) {
           try {
-            const buf = fs.readFileSync(path.join(aseDir, f.name));
+            const buf = fs.readFileSync(path.join(downloadsDir, f.name));
             for (const s of parseASE(buf)) {
               let entry = byName.get(s.name);
               if (!entry) {
@@ -496,17 +491,10 @@ function main() {
                 entry.rgb = s.rgb; // LAB/Gray fallback
               }
             }
-            if (aseDir !== downloadsDir) {
-              fs.mkdirSync(destDownloadDir, { recursive: true });
-              fs.copyFileSync(path.join(aseDir, f.name), path.join(destDownloadDir, f.name));
-              downloads.push({
-                label: titleCaseFromFilename(f.name),
-                type: "ASE",
-                url: `../../assets/downloads/${category.slug}/${page.slug}/${encodeURIComponent(f.name)}`,
-              });
-            }
+            // Already copied into downloads/ and added to `downloads` by the
+            // generic download/ handling above — nothing more to do here.
           } catch (err) {
-            console.warn(`  ! couldn't parse ${category.slug}/${page.slug}/${path.basename(aseDir)}/${f.name}: ${err.message}`);
+            console.warn(`  ! couldn't parse ${category.slug}/${page.slug}/download/${f.name}: ${err.message}`);
           }
         }
       }
