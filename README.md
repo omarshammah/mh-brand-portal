@@ -173,13 +173,20 @@ the importer recognizes it's pointing at a real page and fixes the path automati
 not something to worry about getting exactly right, just get the `category-slug/page-slug`
 part correct and the importer does the rest.
 
-**Color palette from an .ase file**: drop an Adobe Swatch Exchange (`.ase`) file straight into
-a page's `download/` folder (works on any page, but this is built for Color Palette) and the
-importer reads every swatch out of it — RGB, CMYK, LAB, and grayscale colors are all
-converted to HEX/RGB — and builds a Swatch/Name/HEX/RGB table on that page automatically, no
-manual table-writing needed. The `.ase` file also stays downloadable as-is. Re-running the
-importer with an updated `.ase` regenerates that table in place rather than duplicating it,
-so it's safe to swap in a revised swatch file at any time.
+**Color palette from an .ase file**: drop an Adobe Swatch Exchange (`.ase`) file into a page's
+`download/` folder — or `content/`, both are checked, since it's an easy mix-up — (works on any
+page, but this is built for Color Palette) and the importer reads every swatch out of it — RGB,
+CMYK, LAB, and grayscale colors are all converted to HEX/RGB — and builds a Swatch/Name/HEX/
+RGB/CMYK/Pantone table on that page automatically, no manual table-writing needed. The `.ase`
+file also stays downloadable as its own button. Re-running the importer with an updated `.ase`
+regenerates that table in place rather than duplicating it, so it's safe to swap in a revised
+swatch file at any time.
+
+If you export separate RGB and CMYK swatch files for the same colors (see "Fill in a page"
+above), give matching swatches the exact same name in both files — the importer merges them
+into one row by name. A swatch that's auto-named by the design app (like "C=50 M=30 Y=0 K=0")
+or has a stray "copy" suffix from duplicating a swatch won't match its counterpart, and shows
+up as its own separate, incomplete row instead.
 
 A subfolder inside `download/` (rather than a loose file) is treated as one asset kit and
 zipped into a single download — e.g. `download/logo/` containing dozens of format/variant

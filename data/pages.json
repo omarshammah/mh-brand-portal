@@ -199,13 +199,234 @@
             "Section backgrounds"
           ]
         ]
+      },
+      {
+        "type": "table",
+        "source": "ase",
+        "headers": [
+          "Swatch",
+          "Name",
+          "HEX",
+          "RGB",
+          "CMYK",
+          "Pantone"
+        ],
+        "rows": [
+          [
+            "<span class=\"swatch-dot\" style=\"background:#D9F2F2\"></span>",
+            "MA-1",
+            "#D9F2F2",
+            "217, 242, 242",
+            "15, 5, 5, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#BCD8F0\"></span>",
+            "MA-2",
+            "#BCD8F0",
+            "188, 216, 240",
+            "25, 5, 0, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#A6C0E6\"></span>",
+            "MA-3",
+            "#A6C0E6",
+            "166, 192, 230",
+            "35, 15, 0, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#92AEDC\"></span>",
+            "MA-4",
+            "#92AEDC",
+            "146, 174, 220",
+            "40, 25, 0, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#80B2FF\"></span>",
+            "C=50 M=30 Y=0 K=0",
+            "#80B2FF",
+            "128, 178, 255",
+            "50, 30, 0, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#73A6F2\"></span>",
+            "C=55 M=35 Y=5 K=0",
+            "#73A6F2",
+            "115, 166, 242",
+            "55, 35, 5, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#96DCE6\"></span>",
+            "MA-Accent-1",
+            "#96DCE6",
+            "150, 220, 230",
+            "35, 0, 20, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#82D2FF\"></span>",
+            "MA-Accent-2",
+            "#82D2FF",
+            "130, 210, 255",
+            "40, 5, 0, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#80F2FF\"></span>",
+            "C=50 M=5 Y=0 K=0",
+            "#80F2FF",
+            "128, 242, 255",
+            "50, 5, 0, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#4B4146\"></span>",
+            "MA-Schrift",
+            "#4B4146",
+            "75, 65, 70",
+            "65, 65, 55, 45",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#DAE2EA\"></span>",
+            "MA-1 copy 2",
+            "#DAE2EA",
+            "218, 226, 234",
+            "",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#82A0D2\"></span>",
+            "MA-5",
+            "#82A0D2",
+            "130, 160, 210",
+            "",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#7796C8\"></span>",
+            "MA-6",
+            "#7796C8",
+            "119, 150, 200",
+            "",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#69B1FF\"></span>",
+            "MA-Accent-3",
+            "#69B1FF",
+            "105, 177, 255",
+            "",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#FFF8E8\"></span>",
+            "MH-1",
+            "#FFF8E8",
+            "255, 248, 232",
+            "0, 3, 8, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#FFEFE1\"></span>",
+            "MH-2",
+            "#FFEFE1",
+            "255, 239, 225",
+            "0, 7, 10, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#F4E1CD\"></span>",
+            "MH-3",
+            "#F4E1CD",
+            "244, 225, 205",
+            "5, 10, 18, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#E5CEBD\"></span>",
+            "MH-4",
+            "#E5CEBD",
+            "229, 206, 189",
+            "10, 20, 25, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#DAC0B2\"></span>",
+            "MH-5",
+            "#DAC0B2",
+            "218, 192, 178",
+            "15, 25, 30, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#D1AE9B\"></span>",
+            "MH-6",
+            "#D1AE9B",
+            "209, 174, 155",
+            "20, 30, 40, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#FFEAA9\"></span>",
+            "MH-Accent-1",
+            "#FFEAA9",
+            "255, 234, 169",
+            "0, 10, 40, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#FFE2BE\"></span>",
+            "MH-Accent-2",
+            "#FFE2BE",
+            "255, 226, 190",
+            "0, 10, 25, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#FFB899\"></span>",
+            "MH-Accent-3",
+            "#FFB899",
+            "255, 184, 153",
+            "0, 30, 40, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#4B4146\"></span>",
+            "MH-Schrift",
+            "#4B4146",
+            "75, 65, 70",
+            "65, 65, 55, 45",
+            ""
+          ]
+        ]
       }
     ],
     "downloads": [
       {
-        "label": "Color Swatches (ASE)",
+        "label": "MA Swatches CMYK",
         "type": "ASE",
-        "url": "#"
+        "url": "../../assets/downloads/brand-guidelines/color-palette/MA_Swatches-CMYK.ase"
+      },
+      {
+        "label": "MA Swatches RGB",
+        "type": "ASE",
+        "url": "../../assets/downloads/brand-guidelines/color-palette/MA_Swatches-RGB.ase"
+      },
+      {
+        "label": "MH Swatches CMYK",
+        "type": "ASE",
+        "url": "../../assets/downloads/brand-guidelines/color-palette/MH_Swatches-CMYK.ase"
+      },
+      {
+        "label": "MH Swatches RGB",
+        "type": "ASE",
+        "url": "../../assets/downloads/brand-guidelines/color-palette/MH_Swatches-RGB.ase"
       }
     ]
   },

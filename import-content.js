@@ -407,14 +407,15 @@ function main() {
       }
 
       const downloadsDir = path.join(pageDir, "download");
+      const downloads = [];
+      const destDownloadDir = path.join(ROOT, "assets/downloads", category.slug, page.slug);
+
       if (fs.existsSync(downloadsDir) && fs.statSync(downloadsDir).isDirectory()) {
         const entries = fs
           .readdirSync(downloadsDir, { withFileTypes: true })
           .filter((e) => !e.name.startsWith("."));
         if (entries.length) {
-          const destDir = path.join(ROOT, "assets/downloads", category.slug, page.slug);
-          fs.mkdirSync(destDir, { recursive: true });
-          const downloads = [];
+          fs.mkdirSync(destDownloadDir, { recursive: true });
           for (const entry of entries) {
             const entryPath = path.join(downloadsDir, entry.name);
             if (entry.isDirectory()) {
@@ -422,7 +423,7 @@ function main() {
               // one logo lockup) — bundle it into a single .zip download
               // rather than one download button per file inside it.
               const zipName = `${entry.name}.zip`.replace(/\s+/g, "-");
-              const zipDest = path.join(destDir, zipName);
+              const zipDest = path.join(destDownloadDir, zipName);
               try {
                 zipDirectory(entryPath, zipDest);
                 downloads.push({
@@ -434,7 +435,7 @@ function main() {
                 console.warn(`  ! couldn't zip "${entry.name}/" (is the "zip" command installed?) — copying its files individually instead`);
                 for (const { full, rel } of listFilesRecursive(entryPath)) {
                   const flatName = `${entry.name}-${rel}`.replace(/[\\/\s]+/g, "-");
-                  fs.copyFileSync(full, path.join(destDir, flatName));
+                  fs.copyFileSync(full, path.join(destDownloadDir, flatName));
                   const ext = path.extname(flatName).replace(".", "").toUpperCase();
                   downloads.push({
                     label: titleCaseFromFilename(`${entry.name} ${rel}`),
@@ -444,7 +445,7 @@ function main() {
                 }
               }
             } else {
-              fs.copyFileSync(entryPath, path.join(destDir, entry.name));
+              fs.copyFileSync(entryPath, path.join(destDownloadDir, entry.name));
               const ext = path.extname(entry.name).replace(".", "").toUpperCase();
               downloads.push({
                 label: titleCaseFromFilename(entry.name),
@@ -453,73 +454,94 @@ function main() {
               });
             }
           }
-          if (downloads.length) {
-            page.downloads = downloads;
-            downloadsUpdated++;
-            console.log(`  downloads: ${category.slug}/${page.slug}/download/ -> ${downloads.length} item(s)`);
-          }
+        }
+      }
 
-          // Any .ase swatch library dropped in download/ auto-builds a color
-          // table on this page — no hand-written table needed. Swatches are
-          // merged by NAME across every .ase file present, so e.g. a
-          // "Palette-RGB.ase" and a "Palette-CMYK.ase" with matching swatch
-          // names combine into one row per color: RGB and HEX come from the
-          // RGB-model swatch, CMYK comes from the CMYK-model swatch, rather
-          // than converting one to the other (which would drift/round).
-          const aseFiles = entries.filter((e) => e.isFile() && /\.ase$/i.test(e.name)).sort((a, b) => a.name.localeCompare(b.name));
-          if (aseFiles.length) {
-            const byName = new Map();
-            let order = 0;
-            for (const f of aseFiles) {
-              try {
-                const buf = fs.readFileSync(path.join(downloadsDir, f.name));
-                for (const s of parseASE(buf)) {
-                  let entry = byName.get(s.name);
-                  if (!entry) {
-                    entry = { name: s.name, order: order++ };
-                    byName.set(s.name, entry);
-                  }
-                  if (s.model === "RGB") {
-                    entry.rgb = s.rgb;
-                  } else if (s.model === "CMYK") {
-                    entry.cmyk = s.cmyk;
-                    if (!entry.rgb) entry.rgb = s.rgb; // fallback if no RGB-model entry ever shows up for this name
-                  } else if (!entry.rgb) {
-                    entry.rgb = s.rgb; // LAB/Gray fallback
-                  }
-                }
-              } catch (err) {
-                console.warn(`  ! couldn't parse ${category.slug}/${page.slug}/download/${f.name}: ${err.message}`);
+      // Any .ase swatch library auto-builds a color table on this page — no
+      // hand-written table needed. Swatches are merged by NAME across every
+      // .ase file found, so e.g. a "Palette-RGB.ase" and a "Palette-CMYK.ase"
+      // with matching swatch names combine into one row per color: RGB and
+      // HEX come from the RGB-model swatch, CMYK from the CMYK-model swatch,
+      // rather than converting one to the other (which would drift/round).
+      //
+      // Looked for in BOTH download/ and content/ — content/ is an easy place
+      // to drop it by mistake (it's also where other reference material like
+      // images lives), so both are checked rather than silently doing nothing
+      // if it's in the "wrong" one. A file already handled by the download/
+      // loop above isn't re-copied; one found only in content/ gets copied
+      // into the downloads folder and added as its own download button too.
+      const byName = new Map();
+      let order = 0;
+      for (const aseDir of [downloadsDir, contentDir]) {
+        if (!fs.existsSync(aseDir) || !fs.statSync(aseDir).isDirectory()) continue;
+        const aseFiles = fs
+          .readdirSync(aseDir, { withFileTypes: true })
+          .filter((e) => e.isFile() && /\.ase$/i.test(e.name))
+          .sort((a, b) => a.name.localeCompare(b.name));
+        for (const f of aseFiles) {
+          try {
+            const buf = fs.readFileSync(path.join(aseDir, f.name));
+            for (const s of parseASE(buf)) {
+              let entry = byName.get(s.name);
+              if (!entry) {
+                entry = { name: s.name, order: order++ };
+                byName.set(s.name, entry);
+              }
+              if (s.model === "RGB") {
+                entry.rgb = s.rgb;
+              } else if (s.model === "CMYK") {
+                entry.cmyk = s.cmyk;
+                if (!entry.rgb) entry.rgb = s.rgb; // fallback if no RGB-model entry ever shows up for this name
+              } else if (!entry.rgb) {
+                entry.rgb = s.rgb; // LAB/Gray fallback
               }
             }
-            const merged = [...byName.values()].sort((a, b) => a.order - b.order);
-            if (merged.length) {
-              const table = {
-                type: "table",
-                source: "ase",
-                headers: ["Swatch", "Name", "HEX", "RGB", "CMYK", "Pantone"],
-                rows: merged.map((e) => {
-                  const hex = toHex(e.rgb);
-                  const cmykText = e.cmyk ? e.cmyk.map((v) => Math.round(v * 100)).join(", ") : "";
-                  return [
-                    `<span class="swatch-dot" style="background:${hex}"></span>`,
-                    e.name,
-                    hex,
-                    e.rgb.join(", "),
-                    cmykText,
-                    "",
-                  ];
-                }),
-              };
-              if (!Array.isArray(page.body)) page.body = [];
-              const existingIdx = page.body.findIndex((b) => b.type === "table" && b.source === "ase");
-              if (existingIdx >= 0) page.body[existingIdx] = table;
-              else page.body.push(table);
-              pagesUpdated++;
-              console.log(`  color palette: ${category.slug}/${page.slug}/download/*.ase -> ${merged.length} swatch(es)`);
+            if (aseDir !== downloadsDir) {
+              fs.mkdirSync(destDownloadDir, { recursive: true });
+              fs.copyFileSync(path.join(aseDir, f.name), path.join(destDownloadDir, f.name));
+              downloads.push({
+                label: titleCaseFromFilename(f.name),
+                type: "ASE",
+                url: `../../assets/downloads/${category.slug}/${page.slug}/${encodeURIComponent(f.name)}`,
+              });
             }
+          } catch (err) {
+            console.warn(`  ! couldn't parse ${category.slug}/${page.slug}/${path.basename(aseDir)}/${f.name}: ${err.message}`);
           }
         }
+      }
+
+      if (downloads.length) {
+        page.downloads = downloads;
+        downloadsUpdated++;
+        console.log(`  downloads: ${category.slug}/${page.slug} -> ${downloads.length} item(s)`);
+      }
+
+      const merged = [...byName.values()].sort((a, b) => a.order - b.order);
+      if (merged.length) {
+        const table = {
+          type: "table",
+          source: "ase",
+          headers: ["Swatch", "Name", "HEX", "RGB", "CMYK", "Pantone"],
+          rows: merged.map((e) => {
+            const hex = toHex(e.rgb);
+            const cmykText = e.cmyk ? e.cmyk.map((v) => Math.round(v * 100)).join(", ") : "";
+            return [
+              `<span class="swatch-dot" style="background:${hex}"></span>`,
+              e.name,
+              hex,
+              e.rgb.join(", "),
+              cmykText,
+              "",
+            ];
+          }),
+        };
+        if (!Array.isArray(page.body)) page.body = [];
+        const existingIdx = page.body.findIndex((b) => b.type === "table" && b.source === "ase");
+        if (existingIdx >= 0) page.body[existingIdx] = table;
+        else page.body.push(table);
+        pagesUpdated++;
+        console.log(`  color palette: ${category.slug}/${page.slug} -> ${merged.length} swatch(es)`);
       }
     }
   }
