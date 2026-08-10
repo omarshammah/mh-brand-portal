@@ -94,6 +94,14 @@ function titleCaseFromFilename(filename) {
 
 // --- Markdown -> content blocks -------------------------------------------------
 
+// Inline [link text](url) -> <a href="url">link text</a>, used inside paragraphs,
+// list items, and table cells to cross-reference other pages. `url` can be a
+// relative path to another page (see README for the exact "../../category/page/
+// index.html" pattern) or a normal http(s) URL.
+function applyInlineLinks(text) {
+  return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+}
+
 function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, copyImage }) {
   const lines = md.replace(/\r\n/g, "\n").split("\n");
   const blocks = [];
@@ -101,7 +109,7 @@ function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, cop
 
   function flushParagraph() {
     if (paragraphBuf.length) {
-      blocks.push({ type: "p", text: paragraphBuf.join(" ").trim() });
+      blocks.push({ type: "p", text: applyInlineLinks(paragraphBuf.join(" ").trim()) });
       paragraphBuf = [];
     }
   }
@@ -142,7 +150,7 @@ function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, cop
       flushParagraph();
       const items = [];
       while (i < lines.length && /^[-*]\s+/.test(lines[i].trim())) {
-        items.push(lines[i].trim().replace(/^[-*]\s+/, ""));
+        items.push(applyInlineLinks(lines[i].trim().replace(/^[-*]\s+/, "")));
         i++;
       }
       blocks.push({ type: "list", items });
@@ -156,7 +164,7 @@ function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, cop
         i++;
       }
       const cellsOf = (l) =>
-        l.replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+        l.replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => applyInlineLinks(c.trim()));
       if (tableLines.length >= 1) {
         const headers = cellsOf(tableLines[0]);
         const isSeparator = (l) => /^[\s:|-]+$/.test(l);

@@ -141,10 +141,32 @@ node build.js
 ```
 
 What the markdown supports: plain paragraphs, `## ` subheadings, `- ` bullet lists, pipe
-tables (`| A | B |`), and `![alt](image.png)` — the image file should sit in that page's own
-`content/` folder and gets copied into `assets/images/` automatically. (Video files can live
-in `content/` too, but aren't auto-embedded into the page yet — link them as a download
-instead, or use an `embed` block in `pages.json` for a hosted video URL.)
+tables (`| A | B |`), `![alt](image.png)` images — the image file should sit in that page's own
+`content/` folder and gets copied into `assets/images/` automatically — and `[link text](url)`
+links (see "Cross-references between pages" below). (Video files can live in `content/` too,
+but aren't auto-embedded into the page yet — link them as a download instead, or use an
+`embed` block in `pages.json` for a hosted video URL.)
+
+### Cross-references between pages
+
+Write a normal markdown link — `[tone of voice](../../brand/our-tone-of-voice/index.html)` —
+inside a paragraph, a bullet list item, or a table cell, and it becomes a clickable link on the
+page. Works the same in all three places.
+
+The tricky part is the URL. Every page lives two folders deep (`dist/<category-slug>/
+<page-slug>/index.html`), so a link from one page to another always starts with `../../` (back
+out of the current page's folder, then the category's folder, to the site root), then the
+target's own `<category-slug>/<page-slug>/index.html`. So linking from the Copywriting page
+(`brand-guidelines/copywriting/`) to the Tone of Voice page (`brand/our-tone-of-voice/`) is:
+
+```
+Keep to our [tone of voice](../../brand/our-tone-of-voice/index.html) in every piece of copy.
+```
+
+The category and page slugs are the exact folder names already in this Brand-Portal source
+tree (same ones you're placing `.md`/`content/`/`download/` inside), so you can always find
+them by looking at the folder structure. A normal `https://...` URL works too, for linking
+out to something outside the site.
 
 **Color palette from an .ase file**: drop an Adobe Swatch Exchange (`.ase`) file straight into
 a page's `download/` folder (works on any page, but this is built for Color Palette) and the
