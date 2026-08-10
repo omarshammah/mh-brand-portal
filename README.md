@@ -140,12 +140,13 @@ node import-content.js /path/to/Brand-Portal
 node build.js
 ```
 
-What the markdown supports: plain paragraphs, `## ` subheadings, `- ` bullet lists, pipe
-tables (`| A | B |`), `![alt](image.png)` images — the image file should sit in that page's own
-`content/` folder and gets copied into `assets/images/` automatically — and `[link text](url)`
-links (see "Cross-references between pages" below). (Video files can live in `content/` too,
-but aren't auto-embedded into the page yet — link them as a download instead, or use an
-`embed` block in `pages.json` for a hosted video URL.)
+What the markdown supports: plain paragraphs, `## ` subheadings and `### ` (one level smaller,
+for a subheading under a subheading), `- ` bullet lists, pipe tables (`| A | B |`),
+`![alt](image.png)` images — the image file should sit in that page's own `content/` folder
+and gets copied into `assets/images/` automatically — and `[link text](url)` links (see
+"Cross-references between pages" below). (Video files can live in `content/` too, but aren't
+auto-embedded into the page yet — link them as a download instead, or use an `embed` block in
+`pages.json` for a hosted video URL.)
 
 ### Cross-references between pages
 

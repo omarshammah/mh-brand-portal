@@ -371,6 +371,11 @@ table.content-table td a:hover {
   color: var(--primary);
   margin: 32px 0 12px 0;
 }
+.content h3.section-subheading {
+  font-size: 16px;
+  color: var(--primary);
+  margin: 22px 0 10px 0;
+}
 .content ul.content-list {
   margin: 0 0 16px 0;
   padding-left: 20px;

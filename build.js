@@ -138,7 +138,7 @@ function downloadsHtml(page) {
 }
 
 // Content blocks: each item in a page's `body` array has a `type`.
-// Supported types: p, placeholder, h2, list, table, image, embed.
+// Supported types: p, placeholder, h2, h3, list, table, image, embed.
 // See README for the exact shape of each.
 function renderBlock(block) {
   switch (block.type) {
@@ -148,6 +148,8 @@ function renderBlock(block) {
       return `<p class="placeholder-note">${block.text}</p>`;
     case "h2":
       return `<h2 class="section-heading">${block.text}</h2>`;
+    case "h3":
+      return `<h3 class="section-subheading">${block.text}</h3>`;
     case "list":
       return `<ul class="content-list">${block.items.map((i) => `<li>${i}</li>`).join("")}</ul>`;
     case "table": {

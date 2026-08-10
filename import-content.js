@@ -125,9 +125,16 @@ function parseMarkdown(md, { imagesSourceDir, imageDestPrefix, uniquePrefix, cop
       continue;
     }
 
+    if (line.startsWith("### ")) {
+      flushParagraph();
+      blocks.push({ type: "h3", text: applyInlineLinks(line.slice(4).trim()) });
+      i++;
+      continue;
+    }
+
     if (line.startsWith("## ")) {
       flushParagraph();
-      blocks.push({ type: "h2", text: line.slice(3).trim() });
+      blocks.push({ type: "h2", text: applyInlineLinks(line.slice(3).trim()) });
       i++;
       continue;
     }
