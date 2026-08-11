@@ -78,14 +78,25 @@
       {
         "type": "p",
         "text": "Wir schaffen Räume, an denen Patienten individuell,  ganzheitlich und nachhaltig von einem interdisziplinären Team von Experten begleitet werden, mit dem Ziel mehrdimensional gesund zu werden, zu sein und zu bleiben."
-      },
-      {
-        "type": "h2",
-        "text": "Unsere Werte"
-      },
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "id": "our-values",
+    "slug": "our-values",
+    "title": "Our Values",
+    "categoryId": "brand",
+    "order": 2,
+    "summary": "The core values that guide how we work and make decisions.",
+    "body": [
       {
         "type": "p",
         "text": "Markenwerte erfüllen unterschiedliche Zwecke. Sie prägen die Kultur im Team, sie leiten die Kommunikation nach außen und sie komplementieren die Missionsstatement."
+      },
+      {
+        "type": "p",
+        "text": "Unsere Werte sind folgende:"
       },
       {
         "type": "h3",
@@ -138,25 +149,6 @@
       {
         "type": "p",
         "text": "<strong>Entscheidungsfilter</strong>: Kenne ich meinen Patienten gut genug? Hilft diese Entscheidung dem Team dabei, genügend Zeit und Energie in ihre Beziehungen mit den Patienten zu investieren? Trägt diese Maßnahme zur Weiterentwicklung des Teams bei?"
-      }
-    ],
-    "downloads": []
-  },
-  {
-    "id": "our-values",
-    "slug": "our-values",
-    "title": "Our Values",
-    "categoryId": "brand",
-    "order": 2,
-    "summary": "The core values that guide how we work and make decisions.",
-    "body": [
-      {
-        "type": "p",
-        "text": "Placeholder — replace with your real content. List the values themselves (3–6 is typical), each with a short line explaining what it means in practice, not just as a word."
-      },
-      {
-        "type": "p",
-        "text": "For each value, a concrete example of a decision or behavior it should shape helps this page stay usable rather than aspirational."
       }
     ],
     "downloads": []
