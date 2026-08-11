@@ -143,6 +143,25 @@
     "downloads": []
   },
   {
+    "id": "our-values",
+    "slug": "our-values",
+    "title": "Our Values",
+    "categoryId": "brand",
+    "order": 2,
+    "summary": "The core values that guide how we work and make decisions.",
+    "body": [
+      {
+        "type": "p",
+        "text": "Placeholder — replace with your real content. List the values themselves (3–6 is typical), each with a short line explaining what it means in practice, not just as a word."
+      },
+      {
+        "type": "p",
+        "text": "For each value, a concrete example of a decision or behavior it should shape helps this page stay usable rather than aspirational."
+      }
+    ],
+    "downloads": []
+  },
+  {
     "id": "brand-dna",
     "slug": "our-brand-dna",
     "title": "Our Brand DNA",
@@ -396,6 +415,11 @@
         ]
       },
       {
+        "type": "h3",
+        "source": "ase",
+        "text": "MA"
+      },
+      {
         "type": "table",
         "source": "ase",
         "headers": [
@@ -486,7 +510,26 @@
             "75, 65, 70",
             "65, 65, 55, 45",
             ""
-          ],
+          ]
+        ]
+      },
+      {
+        "type": "h3",
+        "source": "ase",
+        "text": "MH"
+      },
+      {
+        "type": "table",
+        "source": "ase",
+        "headers": [
+          "Swatch",
+          "Name",
+          "HEX",
+          "RGB",
+          "CMYK",
+          "Pantone"
+        ],
+        "rows": [
           [
             "<span class=\"swatch-dot\" style=\"background:#FFF8E8\"></span>",
             "MH-1",

@@ -507,11 +507,22 @@ function main() {
 
       const merged = [...byName.values()].sort((a, b) => a.order - b.order);
       if (merged.length) {
-        const table = {
+        // Group swatches by the text before their first "-" (e.g. "MA-Accent-1"
+        // -> group "MA"), so each brand/palette gets its own heading + table
+        // instead of one giant mixed list. Swatches with no "-" in their name
+        // fall into a single ungrouped table with no heading.
+        const groups = new Map(); // prefix (or null) -> entries[]
+        for (const e of merged) {
+          const m = e.name.match(/^([^-]+)-/);
+          const prefix = m ? m[1] : null;
+          if (!groups.has(prefix)) groups.set(prefix, []);
+          groups.get(prefix).push(e);
+        }
+        const makeTable = (entries) => ({
           type: "table",
           source: "ase",
           headers: ["Swatch", "Name", "HEX", "RGB", "CMYK", "Pantone"],
-          rows: merged.map((e) => {
+          rows: entries.map((e) => {
             const hex = toHex(e.rgb);
             const cmykText = e.cmyk ? e.cmyk.map((v) => Math.round(v * 100)).join(", ") : "";
             return [
@@ -523,13 +534,19 @@ function main() {
               "",
             ];
           }),
-        };
+        });
+        const newBlocks = [];
+        for (const [prefix, entries] of groups) {
+          if (prefix) newBlocks.push({ type: "h3", source: "ase", text: prefix });
+          newBlocks.push(makeTable(entries));
+        }
         if (!Array.isArray(page.body)) page.body = [];
-        const existingIdx = page.body.findIndex((b) => b.type === "table" && b.source === "ase");
-        if (existingIdx >= 0) page.body[existingIdx] = table;
-        else page.body.push(table);
+        page.body = page.body.filter((b) => b.source !== "ase");
+        page.body.push(...newBlocks);
         pagesUpdated++;
-        console.log(`  color palette: ${category.slug}/${page.slug} -> ${merged.length} swatch(es)`);
+        console.log(
+          `  color palette: ${category.slug}/${page.slug} -> ${merged.length} swatch(es) in ${groups.size} group(s)`
+        );
       }
     }
   }

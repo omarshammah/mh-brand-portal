@@ -183,6 +183,12 @@ rather than duplicating it, so it's safe to swap in a revised swatch file at any
 `content/` is reserved for photos/videos referenced from the `.md` file — `.ase` files that
 end up there aren't picked up, so keep them in `download/`.
 
+Swatches are automatically split into a separate heading + table per name prefix — the text
+before the first `-` in the swatch name. So `MA-1`, `MA-2`, `MA-Accent-1` all group under an
+"MA" heading/table, while `MH-1`, `MH-Accent-1` group under their own "MH" heading/table. This
+works across as many `.ase` files as you drop in — grouping is by swatch name, not by file. A
+swatch name with no `-` in it falls into a single ungrouped table with no heading.
+
 If you export separate RGB and CMYK swatch files for the same colors (see "Fill in a page"
 above), give matching swatches the exact same name in both files — the importer merges them
 into one row by name. A swatch that's auto-named by the design app (like "C=50 M=30 Y=0 K=0")
