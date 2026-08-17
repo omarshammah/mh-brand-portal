@@ -8,6 +8,11 @@
     "summary": "Company overview, founding story, and purpose statement.",
     "body": [
       {
+        "type": "image",
+        "src": "../../assets/images/brand-who-we-are-mh-Artboard-26.jpg",
+        "alt": "Keyvisual"
+      },
+      {
         "type": "h2",
         "text": "Positionierung"
       },
@@ -407,6 +412,28 @@
         ]
       },
       {
+        "type": "h2",
+        "text": "Farbverläufe"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-color-palette-mh-Artboard-26.jpg",
+        "alt": "Beispiel"
+      },
+      {
+        "type": "p",
+        "text": "Für unseren Markenauftritt sind Farbverläufe ein wichtiger Element. Sie sind ein Versuch den seelischen Aspekt unseres Ansatzes zu verbildlichen. Farbverläufe stehen für den sanften Wandel von einem Zustand hin zum anderen. Sie veranschaulichen Worte wie, Zusammenhang, Integration und Ganzheitlichkeit."
+      },
+      {
+        "type": "p",
+        "text": "Folgend ist eine Erklärung, wie die Key Visuals mit unseren Farbverläufen wiederhergestellt werden können."
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-color-palette-mh-Artboard-40.jpg",
+        "alt": "Zusammenstellung"
+      },
+      {
         "type": "h3",
         "source": "ase",
         "text": "MA"
@@ -717,7 +744,89 @@
     "body": [
       {
         "type": "p",
-        "text": "Placeholder — replace with your real content. Define the shape vocabulary (rounded vs. sharp, geometric vs. organic), the icon style, and any signature graphic devices or patterns."
+        "text": "Unsere Formsprache ist ein Ausdruck unserer Tonalität. Vor allem, widerspiegeln Formen den ruhigen Aspekt und den organischen Unterton. Wie das genau funktioniert, erklären wir anhand folgender Beispiele:"
+      },
+      {
+        "type": "h2",
+        "text": "Iconography"
+      },
+      {
+        "type": "p",
+        "text": "Unsere Icons lassen sich in zwei Ebenen teilen, Wegfindung und User-Interface."
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-form-language-mh-Artboard-39.jpg",
+        "alt": "Iconography"
+      },
+      {
+        "type": "h3",
+        "text": "Wegfindung"
+      },
+      {
+        "type": "p",
+        "text": "Die Icons zur Wegfindung sind in den meisten Fällen von Schrift begleitet und daher lassen sie sich von der selben Anatomie unserer Schriftart inspirieren. So findet ein harmonische Verhältnis zwischen den beiden Elementen statt."
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-form-language-mh-Artboard-13.jpg",
+        "alt": "Iconography"
+      },
+      {
+        "type": "p",
+        "text": "\"![Kombi aus Schrift und Icon] (mh-Artboard 14.jpg)\""
+      },
+      {
+        "type": "p",
+        "text": "\"![Kombi aus Schrift und Icon] (mh-Artboard 15.jpg)\""
+      },
+      {
+        "type": "h3",
+        "text": "User-Interface"
+      },
+      {
+        "type": "p",
+        "text": "Platzhalter"
+      },
+      {
+        "type": "p",
+        "text": "\"![UI-Buttons] (mh-Artboard 47.jpg)\" ** Die Buttons - z.B. auf unserer Webseite - sollten eine Konturlinie mit 2px Dicke und Ecken mit 20px abrundung."
+      },
+      {
+        "type": "h2",
+        "text": "Bildgrafiken"
+      },
+      {
+        "type": "h3",
+        "text": "Hinweispfeile"
+      },
+      {
+        "type": "p",
+        "text": "In unseren Bildern und Grafiken wird es vielmals ein oder mehrere Elemente, die genauer erklärt bzw. beschrieben werden müssen. Dafür können wir unsere Pointers verwenden."
+      },
+      {
+        "type": "p",
+        "text": "\"![Hinweispfeile] (mh-Artboard 16.jpg)\""
+      },
+      {
+        "type": "h3",
+        "text": "Hinweiszahlen"
+      },
+      {
+        "type": "p",
+        "text": "Ansonsten, können wir auch Hinweiszahlen verwenden, die folgendermaßen aussehen sollten:"
+      },
+      {
+        "type": "p",
+        "text": "\"![Kombi aus Schrift und Icon] (mh-Artboard 36.jpg)\""
+      },
+      {
+        "type": "h2",
+        "text": "Rahmen und Konturen"
+      },
+      {
+        "type": "p",
+        "text": "Bildelemente haben abgerundete Ecken von 20px \"![Kombi aus Schrift und Icon] (mh-Artboard 36.jpg)\""
       }
     ],
     "downloads": [
@@ -1045,8 +1154,109 @@
     "summary": "Photography style, imagery mood boards, and illustration style.",
     "body": [
       {
+        "type": "h2",
+        "text": "Bildsprache"
+      },
+      {
+        "type": "h3",
+        "text": "Personenfotos"
+      },
+      {
         "type": "p",
-        "text": "Placeholder — replace with your real content. Show reference imagery for photography style (lighting, framing, color grading), mood boards, and illustration style if applicable."
+        "text": "Das wichtigste Kriterium eines guten Personenfoto unserer Marke ist Authentizität. Personenfotos sollen auf keinen Fall, wie Stockfotos aussehen. Wir vermeiden gestellte Szenarien und zu sehr inszenierte Situationen."
+      },
+      {
+        "type": "p",
+        "text": "Bilder beeinflüssen die Markentonalität stark. Daher müssen wir bei der Auswahl unserer Fotos immer darauf achten, dass sie hell, klar, tief, ruhig und organisch sind. Hell ist in diesem Zusammenhang selbsterklärend. Klarheit lässt sich in scharfen Details und möglichst gar keine Weichzeichner oder Blur Effekte zeigen. Tiefe und Ruhe hängen eng zusammen und beziehen sich oftmals auf den Leerraum in einem Foto und die Tiefe im Hintergrund eines Subjektes. Der organische Unterton wird durch natürlichen Materialien und Elementen sichtbar, aber auch durch die Wärme der Farbgebung."
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-art-direction-mh-Artboard-44.jpg",
+        "alt": "Personenfotos"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-art-direction-mh-Artboard-46.jpg",
+        "alt": "Personenfotos"
+      },
+      {
+        "type": "p",
+        "text": "Folgend sind einige gute und dann schlechte Beispiele:"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-art-direction-mh-Artboard-48.jpg",
+        "alt": "Personenfotos"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-art-direction-mh-Artboard-49.jpg",
+        "alt": "Personenfotos"
+      },
+      {
+        "type": "h3",
+        "text": "Innenräume"
+      },
+      {
+        "type": "p",
+        "text": "Sowie bei den Personenfotos, achten wir beim Fotografieren unserer Innenräume auf die Tonalität. Vor allem ist es hier wichtig Fotos mit möglichst natürlicher Beleuchtung aufzunehmen. Den organischen Aspekt lässt sich hier auch durch Materialien und pflanzlichen Elementen zeigen."
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-art-direction-mh-Artboard-50.jpg",
+        "alt": "Innenräume"
+      },
+      {
+        "type": "p",
+        "text": "1- zu klinisch, zu clean\u0003\r2- organische Materiallien aber geometrische Formen und künstliches Licht.\u0003\r3- organische Materiallien und Formen, organische Elemente, genug Tiefe, natürliches Tageslicht."
+      },
+      {
+        "type": "h3",
+        "text": "Landschaft"
+      },
+      {
+        "type": "p",
+        "text": "Für unsere Marke spielt Natur eine große Rolle und Landschaftsfotos können gerne zum Beispiel als Hintergründe oder Übergänge in Videos benutzt werden."
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-art-direction-mh-Artboard-45.jpg",
+        "alt": "Landschaftsfotos"
+      },
+      {
+        "type": "p",
+        "text": "Folgend sind einige gute und dann schlechte Beispiele:"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-art-direction-mh-Artboard-51.jpg",
+        "alt": "Personenfotos"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-art-direction-mh-Artboard-52.jpg",
+        "alt": "Personenfotos"
+      },
+      {
+        "type": "h2",
+        "text": "Grafikelemente"
+      },
+      {
+        "type": "h3",
+        "text": "Die Ringe im Kontext"
+      },
+      {
+        "type": "p",
+        "text": "Die zwei Ringe aus unserem Logomark erzählen im Grunde unsere ganze Story auf einer abstrakten und sehr reduzierten Art. Daher verwenden wir sie gerne als grafische Ergänzung zu Bildern zum Beispiel. Da die Schnittmenge der Ringe ja für die integrative Natur unseres Konzepts, benutzen wir sie, um bewusst eine Botschaft zu kommunizieren. Beispielsweise, wenn wir eine Person in die Schnittmenge setzen, sagen wir: Du stehst in der Mitte."
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-art-direction-mh-Artboard-27.jpg",
+        "alt": "Ringe im Kontext"
+      },
+      {
+        "type": "h2",
+        "text": "Beispiele"
       }
     ],
     "downloads": []
