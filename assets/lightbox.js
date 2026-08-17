@@ -13,6 +13,7 @@
     overlayImg.src = src;
     overlayImg.alt = alt || "";
     overlayImg.classList.remove("is-zoomed"); // always opens at the fitted size
+    overlayImg.style.transformOrigin = "center center";
     overlay.classList.add("is-open");
     document.body.classList.add("lightbox-locked");
   }
@@ -24,12 +25,19 @@
     overlayImg.src = "";
   }
 
-  // 1st click on the enlarged photo zooms further in (to its natural pixel
-  // size, scrollable if larger than the viewport); 2nd click zooms back out
-  // to the fitted size. Stops propagation so it never reaches the overlay's
-  // own click-to-close handler below.
+  // 1st click on the enlarged photo zooms further in, centered on exactly
+  // where it was clicked (via transform-origin, set from the click position
+  // just before the zoom class is applied); 2nd click zooms back out to the
+  // fitted size. Stops propagation so it never reaches the overlay's own
+  // click-to-close handler below.
   overlayImg.addEventListener("click", function (e) {
     e.stopPropagation();
+    if (!overlayImg.classList.contains("is-zoomed")) {
+      var rect = overlayImg.getBoundingClientRect();
+      var originX = ((e.clientX - rect.left) / rect.width) * 100;
+      var originY = ((e.clientY - rect.top) / rect.height) * 100;
+      overlayImg.style.transformOrigin = originX + "% " + originY + "%";
+    }
     overlayImg.classList.toggle("is-zoomed");
   });
 

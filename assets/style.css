@@ -436,6 +436,7 @@ figure.content-figure figcaption {
   justify-content: center;
   padding: 40px;
   background: rgba(0, 0, 0, 0.85);
+  overflow: hidden; /* a zoomed (scaled) photo can exceed the viewport — clip instead of scrolling the page */
 }
 .lightbox-overlay.is-open {
   display: flex;
@@ -446,20 +447,15 @@ figure.content-figure figcaption {
   display: block;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
   cursor: zoom-in; /* 1st click zooms in further; clicking the photo never closes the overlay */
+  transform: scale(1);
+  transition: transform 0.2s ease;
 }
-/* Zoomed state (2nd state, toggled by assets/lightbox.js): the photo grows
-   to its natural pixel size instead of being fit to the viewport. The
-   overlay itself switches to a scrollable, top-aligned box so a photo
-   taller/wider than the screen can be panned to rather than clipped. */
-.lightbox-overlay:has(.lightbox-img.is-zoomed) {
-  align-items: flex-start;
-  justify-content: flex-start;
-  overflow: auto;
-  padding: 40px;
-}
+/* Zoomed state (2nd state, toggled by assets/lightbox.js): scales up around
+   transform-origin, which lightbox.js sets to the exact point that was
+   clicked just before this class is added — so the zoom lands on whatever
+   part of the photo the visitor pointed at, not always the center. */
 .lightbox-overlay .lightbox-img.is-zoomed {
-  max-width: none;
-  max-height: none;
+  transform: scale(2.2);
   cursor: zoom-out;
 }
 .lightbox-overlay .lightbox-close {
