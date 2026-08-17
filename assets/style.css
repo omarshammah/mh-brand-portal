@@ -415,11 +415,59 @@ figure.content-figure {
 figure.content-figure img {
   max-width: 100%;
   display: block;
+  cursor: zoom-in; /* hints that clicking opens the enlarged view */
 }
 figure.content-figure figcaption {
   font-size: 13px;
   color: var(--muted);
   margin-top: 8px;
+}
+
+/* Click-to-enlarge overlay (see assets/lightbox.js). Sits at the end of
+   <body> on every page (lightboxHtml() in build.js), hidden until a content
+   photo is clicked. Clicking the dimmed backdrop, the (X), or Escape closes
+   it — clicking the enlarged photo itself does not. */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.85);
+}
+.lightbox-overlay.is-open {
+  display: flex;
+}
+.lightbox-overlay .lightbox-img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  cursor: default; /* clicking the photo itself should not close the overlay */
+}
+.lightbox-overlay .lightbox-close {
+  position: fixed;
+  top: 24px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.lightbox-overlay .lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+/* Locks the underlying page from scrolling while the overlay is open. */
+body.lightbox-locked {
+  overflow: hidden;
 }
 .content-embed {
   position: relative;

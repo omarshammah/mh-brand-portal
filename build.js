@@ -213,6 +213,20 @@ function headExtras(rel) {
   <link rel="preload" href="${rel}assets/fonts/NeueCampton-Light.woff2" as="font" type="font/woff2" crossorigin />`;
 }
 
+// Click-to-enlarge for every content photo (any <img> inside a
+// .content-figure — see the "image" case in renderBlock). The overlay is
+// a single reusable element sitting at the end of <body> on every page;
+// assets/lightbox.js wires up the click/close behavior at runtime. Kept as
+// one shared block (rather than per-page inline script) so every page
+// generated from pageShell() or buildLegalPage() gets it automatically.
+function lightboxHtml(rel) {
+  return `<div class="lightbox-overlay" id="lightbox-overlay">
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+    <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+  </div>
+  <script src="${rel}assets/lightbox.js" defer></script>`;
+}
+
 function pageShell({ brand, title, navActive, sidebar, bodyHtml, rel }) {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -238,6 +252,7 @@ function pageShell({ brand, title, navActive, sidebar, bodyHtml, rel }) {
   <footer>
     ${footerHtml(brand, rel)}
   </footer>
+  ${lightboxHtml(rel)}
 </body>
 </html>`;
 }
@@ -348,6 +363,7 @@ function buildLegalPage(page, data) {
   <footer>
     ${footerHtml(brand, rel)}
   </footer>
+  ${lightboxHtml(rel)}
 </body>
 </html>`;
   writeFile(path.join(DIST, page.slug, "index.html"), html);
@@ -363,6 +379,11 @@ function buildAssets(data) {
     .replace("__MUTED__", data.brand.colors.muted)
     .replace("__FONT__", data.brand.fontFamily);
   writeFile(path.join(DIST, "assets/style.css"), css);
+
+  // Lightbox behavior (click-to-enlarge on every content photo) — see
+  // lightboxHtml() above for the markup this wires up.
+  const lightboxJs = fs.readFileSync(path.join(ROOT, "assets/lightbox.js"), "utf8");
+  writeFile(path.join(DIST, "assets/lightbox.js"), lightboxJs);
 
   // Copy any user-added images across (assets/images/* -> dist/assets/images/*)
   const imgSrc = path.join(ROOT, "assets/images");

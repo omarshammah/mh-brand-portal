@@ -56,7 +56,9 @@ those two entries in `data/pages.json` to see the exact shape.
 
 **Images**: drop image files into `assets/images/` (create the folder if it doesn't exist) —
 `node build.js` copies it into `dist/assets/images/` automatically. Reference them from a
-page with `../../assets/images/yourfile.png`.
+page with `../../assets/images/yourfile.png`. Every content photo is click-to-enlarge
+site-wide, no extra setup needed — clicking one opens it full-size in an overlay, closable via
+the (X), clicking outside the photo, or Escape.
 
 **Slides**: for an inline-viewable deck, publish it in Google Slides (File → Share →
 Publish to web → Embed) and use that embed URL as the `embed` block's `src`. For a
