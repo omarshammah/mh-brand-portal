@@ -445,7 +445,22 @@ figure.content-figure figcaption {
   max-height: 100%;
   display: block;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-  cursor: default; /* clicking the photo itself should not close the overlay */
+  cursor: zoom-in; /* 1st click zooms in further; clicking the photo never closes the overlay */
+}
+/* Zoomed state (2nd state, toggled by assets/lightbox.js): the photo grows
+   to its natural pixel size instead of being fit to the viewport. The
+   overlay itself switches to a scrollable, top-aligned box so a photo
+   taller/wider than the screen can be panned to rather than clipped. */
+.lightbox-overlay:has(.lightbox-img.is-zoomed) {
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: auto;
+  padding: 40px;
+}
+.lightbox-overlay .lightbox-img.is-zoomed {
+  max-width: none;
+  max-height: none;
+  cursor: zoom-out;
 }
 .lightbox-overlay .lightbox-close {
   position: fixed;

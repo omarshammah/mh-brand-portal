@@ -12,6 +12,7 @@
   function openLightbox(src, alt) {
     overlayImg.src = src;
     overlayImg.alt = alt || "";
+    overlayImg.classList.remove("is-zoomed"); // always opens at the fitted size
     overlay.classList.add("is-open");
     document.body.classList.add("lightbox-locked");
   }
@@ -19,8 +20,18 @@
   function closeLightbox() {
     overlay.classList.remove("is-open");
     document.body.classList.remove("lightbox-locked");
+    overlayImg.classList.remove("is-zoomed");
     overlayImg.src = "";
   }
+
+  // 1st click on the enlarged photo zooms further in (to its natural pixel
+  // size, scrollable if larger than the viewport); 2nd click zooms back out
+  // to the fitted size. Stops propagation so it never reaches the overlay's
+  // own click-to-close handler below.
+  overlayImg.addEventListener("click", function (e) {
+    e.stopPropagation();
+    overlayImg.classList.toggle("is-zoomed");
+  });
 
   document.querySelectorAll(".content-figure img").forEach(function (img) {
     img.addEventListener("click", function () {
