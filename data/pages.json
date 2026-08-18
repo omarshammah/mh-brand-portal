@@ -399,105 +399,6 @@
       {
         "type": "h3",
         "source": "ase",
-        "text": "MA"
-      },
-      {
-        "type": "table",
-        "source": "ase",
-        "headers": [
-          "Swatch",
-          "Name",
-          "HEX",
-          "RGB",
-          "CMYK",
-          "Pantone"
-        ],
-        "rows": [
-          [
-            "<span class=\"swatch-dot\" style=\"background:#DAE2EA\"></span>",
-            "MA-1",
-            "#DAE2EA",
-            "218, 226, 234",
-            "15, 5, 5, 0",
-            ""
-          ],
-          [
-            "<span class=\"swatch-dot\" style=\"background:#BCD8F0\"></span>",
-            "MA-2",
-            "#BCD8F0",
-            "188, 216, 240",
-            "25, 5, 0, 0",
-            ""
-          ],
-          [
-            "<span class=\"swatch-dot\" style=\"background:#A6C0E6\"></span>",
-            "MA-3",
-            "#A6C0E6",
-            "166, 192, 230",
-            "35, 15, 0, 0",
-            ""
-          ],
-          [
-            "<span class=\"swatch-dot\" style=\"background:#92AEDC\"></span>",
-            "MA-4",
-            "#92AEDC",
-            "146, 174, 220",
-            "40, 25, 0, 0",
-            ""
-          ],
-          [
-            "<span class=\"swatch-dot\" style=\"background:#82A0D2\"></span>",
-            "MA-5",
-            "#82A0D2",
-            "130, 160, 210",
-            "50, 30, 0, 0",
-            ""
-          ],
-          [
-            "<span class=\"swatch-dot\" style=\"background:#7796C8\"></span>",
-            "MA-6",
-            "#7796C8",
-            "119, 150, 200",
-            "55, 35, 5, 0",
-            ""
-          ],
-          [
-            "<span class=\"swatch-dot\" style=\"background:#96DCE6\"></span>",
-            "MA-Accent-1",
-            "#96DCE6",
-            "150, 220, 230",
-            "35, 0, 20, 0",
-            ""
-          ],
-          [
-            "<span class=\"swatch-dot\" style=\"background:#82D2FF\"></span>",
-            "MA-Accent-2",
-            "#82D2FF",
-            "130, 210, 255",
-            "40, 5, 0, 0",
-            ""
-          ],
-          [
-            "<span class=\"swatch-dot\" style=\"background:#69B1FF\"></span>",
-            "MA-Accent-3",
-            "#69B1FF",
-            "105, 177, 255",
-            "50, 5, 0, 0",
-            ""
-          ],
-          [
-            "<span class=\"swatch-dot\" style=\"background:#4B4146\"></span>",
-            "MA-Schrift",
-            "#4B4146",
-            "75, 65, 70",
-            "65, 65, 55, 45",
-            ""
-          ]
-        ]
-      },
-      {
-        "type": "h3",
-        "source": "ase",
         "text": "MH"
       },
       {
@@ -512,6 +413,30 @@
           "Pantone"
         ],
         "rows": [
+          [
+            "<span class=\"swatch-dot\" style=\"background:#FFEAA9\"></span>",
+            "MH-Accent-1",
+            "#FFEAA9",
+            "255, 234, 169",
+            "0, 10, 40, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#FFE2BE\"></span>",
+            "MH-Accent-2",
+            "#FFE2BE",
+            "255, 226, 190",
+            "0, 10, 25, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#FFB899\"></span>",
+            "MH-Accent-3",
+            "#FFB899",
+            "255, 184, 153",
+            "0, 30, 40, 0",
+            ""
+          ],
           [
             "<span class=\"swatch-dot\" style=\"background:#FFF8E8\"></span>",
             "MH-1",
@@ -561,35 +486,183 @@
             ""
           ],
           [
-            "<span class=\"swatch-dot\" style=\"background:#FFEAA9\"></span>",
-            "MH-Accent-1",
-            "#FFEAA9",
-            "255, 234, 169",
-            "0, 10, 40, 0",
-            ""
-          ],
-          [
-            "<span class=\"swatch-dot\" style=\"background:#FFE2BE\"></span>",
-            "MH-Accent-2",
-            "#FFE2BE",
-            "255, 226, 190",
-            "0, 10, 25, 0",
-            ""
-          ],
-          [
-            "<span class=\"swatch-dot\" style=\"background:#FFB899\"></span>",
-            "MH-Accent-3",
-            "#FFB899",
-            "255, 184, 153",
-            "0, 30, 40, 0",
-            ""
-          ],
-          [
             "<span class=\"swatch-dot\" style=\"background:#4B4146\"></span>",
             "MH-Schrift",
             "#4B4146",
             "75, 65, 70",
             "65, 65, 55, 45",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "h3",
+        "source": "ase",
+        "text": "ME"
+      },
+      {
+        "type": "table",
+        "source": "ase",
+        "headers": [
+          "Swatch",
+          "Name",
+          "HEX",
+          "RGB",
+          "CMYK",
+          "Pantone"
+        ],
+        "rows": [
+          [
+            "<span class=\"swatch-dot\" style=\"background:#BEE6D2\"></span>",
+            "ME-Accent-1",
+            "#BEE6D2",
+            "190, 230, 210",
+            "25, 0, 20, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#DEE791\"></span>",
+            "ME-Accent-2",
+            "#DEE791",
+            "222, 231, 145",
+            "15, 0, 55, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#ADD57F\"></span>",
+            "ME-Accent-3",
+            "#ADD57F",
+            "173, 213, 127",
+            "35, 0, 65, 0",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "h3",
+        "source": "ase",
+        "text": "MA"
+      },
+      {
+        "type": "table",
+        "source": "ase",
+        "headers": [
+          "Swatch",
+          "Name",
+          "HEX",
+          "RGB",
+          "CMYK",
+          "Pantone"
+        ],
+        "rows": [
+          [
+            "<span class=\"swatch-dot\" style=\"background:#96DCE6\"></span>",
+            "MA-Accent-1",
+            "#96DCE6",
+            "150, 220, 230",
+            "35, 0, 20, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#82D2FF\"></span>",
+            "MA-Accent-2",
+            "#82D2FF",
+            "130, 210, 255",
+            "40, 5, 0, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#78BEED\"></span>",
+            "MA-Accent-3",
+            "#78BEED",
+            "120, 190, 237",
+            "50, 5, 0, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#DAE2EA\"></span>",
+            "MA-1 copy 2",
+            "#DAE2EA",
+            "218, 226, 234",
+            "",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#DAE2EA\"></span>",
+            "MA-1",
+            "#DAE2EA",
+            "218, 226, 234",
+            "15, 5, 5, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#BCD8F0\"></span>",
+            "MA-2",
+            "#BCD8F0",
+            "188, 216, 240",
+            "25, 5, 0, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#A6C0E6\"></span>",
+            "MA-3",
+            "#A6C0E6",
+            "166, 192, 230",
+            "35, 15, 0, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#92AEDC\"></span>",
+            "MA-4",
+            "#92AEDC",
+            "146, 174, 220",
+            "40, 25, 0, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#82A0D2\"></span>",
+            "MA-5",
+            "#82A0D2",
+            "130, 160, 210",
+            "50, 30, 0, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#7796C8\"></span>",
+            "MA-6",
+            "#7796C8",
+            "119, 150, 200",
+            "55, 35, 5, 0",
+            ""
+          ],
+          [
+            "<span class=\"swatch-dot\" style=\"background:#4B4146\"></span>",
+            "MA-Schrift",
+            "#4B4146",
+            "75, 65, 70",
+            "65, 65, 55, 45",
+            ""
+          ]
+        ]
+      },
+      {
+        "type": "table",
+        "source": "ase",
+        "headers": [
+          "Swatch",
+          "Name",
+          "HEX",
+          "RGB",
+          "CMYK",
+          "Pantone"
+        ],
+        "rows": [
+          [
+            "<span class=\"swatch-dot\" style=\"background:#75BEE9\"></span>",
+            "C=50 M=10 Y=0 K=0",
+            "#75BEE9",
+            "117, 190, 233",
+            "",
             ""
           ]
         ]
@@ -633,6 +706,16 @@
       }
     ],
     "downloads": [
+      {
+        "label": "Accents Swatches CMYK",
+        "type": "ASE",
+        "url": "../../assets/downloads/brand-guidelines/color-palette/Accents_Swatches-CMYK.ase"
+      },
+      {
+        "label": "Accents Swatches RGB",
+        "type": "ASE",
+        "url": "../../assets/downloads/brand-guidelines/color-palette/Accents_Swatches-RGB.ase"
+      },
       {
         "label": "MA Swatches CMYK",
         "type": "ASE",
@@ -839,7 +922,7 @@
       },
       {
         "type": "image",
-        "src": "../../assets/images/brand-guidelines-form-language-mh-Artboard-36.jpg",
+        "src": "../../assets/images/brand-guidelines-form-language-mh-Artboard-17.jpg",
         "alt": "Kombi aus Schrift und Icon"
       }
     ],
