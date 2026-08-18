@@ -581,14 +581,6 @@
           ],
           [
             "<span class=\"swatch-dot\" style=\"background:#DAE2EA\"></span>",
-            "MA-1 copy 2",
-            "#DAE2EA",
-            "218, 226, 234",
-            "",
-            ""
-          ],
-          [
-            "<span class=\"swatch-dot\" style=\"background:#DAE2EA\"></span>",
             "MA-1",
             "#DAE2EA",
             "218, 226, 234",
@@ -641,28 +633,6 @@
             "#4B4146",
             "75, 65, 70",
             "65, 65, 55, 45",
-            ""
-          ]
-        ]
-      },
-      {
-        "type": "table",
-        "source": "ase",
-        "headers": [
-          "Swatch",
-          "Name",
-          "HEX",
-          "RGB",
-          "CMYK",
-          "Pantone"
-        ],
-        "rows": [
-          [
-            "<span class=\"swatch-dot\" style=\"background:#75BEE9\"></span>",
-            "C=50 M=10 Y=0 K=0",
-            "#75BEE9",
-            "117, 190, 233",
-            "",
             ""
           ]
         ]
