@@ -191,6 +191,10 @@ before the first `-` in the swatch name. So `MA-1`, `MA-2`, `MA-Accent-1` all gr
 works across as many `.ase` files as you drop in — grouping is by swatch name, not by file. A
 swatch name with no `-` in it falls into a single ungrouped table with no heading.
 
+These ASE-generated tables always lead the page, with whatever you write in `color-palette.md`
+following after them — regardless of import order, so usage notes in the `.md` file always read
+as commentary underneath the tables rather than being separated from them.
+
 If you export separate RGB and CMYK swatch files for the same colors (see "Fill in a page"
 above), give matching swatches the exact same name in both files — the importer merges them
 into one row by name. A swatch that's auto-named by the design app (like "C=50 M=30 Y=0 K=0")

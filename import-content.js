@@ -541,8 +541,10 @@ function main() {
           newBlocks.push(makeTable(entries));
         }
         if (!Array.isArray(page.body)) page.body = [];
-        page.body = page.body.filter((b) => b.source !== "ase");
-        page.body.push(...newBlocks);
+        // ASE-generated tables (and their group headings) always lead the
+        // page, with the .md file's own written content following after —
+        // rather than wherever they'd otherwise fall from import order.
+        page.body = [...newBlocks, ...page.body.filter((b) => b.source !== "ase")];
         pagesUpdated++;
         console.log(
           `  color palette: ${category.slug}/${page.slug} -> ${merged.length} swatch(es) in ${groups.size} group(s)`

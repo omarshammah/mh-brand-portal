@@ -397,43 +397,6 @@
     "summary": "Primary/secondary palette with HEX, RGB, CMYK, and Pantone values.",
     "body": [
       {
-        "type": "p",
-        "text": "Unsere Farbpalette widerspiegelt unsere Tonalität, indem sie überwiegend hell und klar ist."
-      },
-      {
-        "type": "p",
-        "text": "Je nach Zweck, benutzen wir entweder die MH oder die MA Palette."
-      },
-      {
-        "type": "list",
-        "items": [
-          "MH ist die primäre Palette für die Praxis.",
-          "MA ist die primäre Palette für Concepts."
-        ]
-      },
-      {
-        "type": "h2",
-        "text": "Farbverläufe"
-      },
-      {
-        "type": "image",
-        "src": "../../assets/images/brand-guidelines-color-palette-mh-Artboard-26.jpg",
-        "alt": "Beispiel"
-      },
-      {
-        "type": "p",
-        "text": "Für unseren Markenauftritt sind Farbverläufe ein wichtiger Element. Sie sind ein Versuch den seelischen Aspekt unseres Ansatzes zu verbildlichen. Farbverläufe stehen für den sanften Wandel von einem Zustand hin zum anderen. Sie veranschaulichen Worte wie, Zusammenhang, Integration und Ganzheitlichkeit."
-      },
-      {
-        "type": "p",
-        "text": "Folgend ist eine Erklärung, wie die Key Visuals mit unseren Farbverläufen wiederhergestellt werden können."
-      },
-      {
-        "type": "image",
-        "src": "../../assets/images/brand-guidelines-color-palette-mh-Artboard-40.jpg",
-        "alt": "Zusammenstellung"
-      },
-      {
         "type": "h3",
         "source": "ase",
         "text": "MA"
@@ -630,6 +593,43 @@
             ""
           ]
         ]
+      },
+      {
+        "type": "p",
+        "text": "Unsere Farbpalette widerspiegelt unsere Tonalität, indem sie überwiegend hell und klar ist."
+      },
+      {
+        "type": "p",
+        "text": "Je nach Zweck, benutzen wir entweder die MH oder die MA Palette."
+      },
+      {
+        "type": "list",
+        "items": [
+          "MH ist die primäre Palette für die Praxis.",
+          "MA ist die primäre Palette für Concepts."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "Farbverläufe"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-color-palette-mh-Artboard-26.jpg",
+        "alt": "Beispiel"
+      },
+      {
+        "type": "p",
+        "text": "Für unseren Markenauftritt sind Farbverläufe ein wichtiger Element. Sie sind ein Versuch den seelischen Aspekt unseres Ansatzes zu verbildlichen. Farbverläufe stehen für den sanften Wandel von einem Zustand hin zum anderen. Sie veranschaulichen Worte wie, Zusammenhang, Integration und Ganzheitlichkeit."
+      },
+      {
+        "type": "p",
+        "text": "Folgend ist eine Erklärung, wie die Key Visuals mit unseren Farbverläufen wiederhergestellt werden können."
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-color-palette-mh-Artboard-40.jpg",
+        "alt": "Zusammenstellung"
       }
     ],
     "downloads": [
