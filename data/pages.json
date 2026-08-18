@@ -773,12 +773,14 @@
         "alt": "Iconography"
       },
       {
-        "type": "p",
-        "text": "\"![Kombi aus Schrift und Icon] (mh-Artboard 14.jpg)\""
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-form-language-mh-Artboard-14.jpg",
+        "alt": "Kombi aus Schrift und Icon"
       },
       {
-        "type": "p",
-        "text": "\"![Kombi aus Schrift und Icon] (mh-Artboard 15.jpg)\""
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-form-language-mh-Artboard-15.jpg",
+        "alt": "Icon"
       },
       {
         "type": "h3",
@@ -789,8 +791,13 @@
         "text": "Platzhalter"
       },
       {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-form-language-mh-Artboard-47.jpg",
+        "alt": "UI-Buttons"
+      },
+      {
         "type": "p",
-        "text": "\"![UI-Buttons] (mh-Artboard 47.jpg)\" ** Die Buttons - z.B. auf unserer Webseite - sollten eine Konturlinie mit 2px Dicke und Ecken mit 20px abrundung."
+        "text": "** Die Buttons - z.B. auf unserer Webseite - sollten eine Konturlinie mit 2px Dicke und Ecken mit 20px abrundung."
       },
       {
         "type": "h2",
@@ -805,8 +812,9 @@
         "text": "In unseren Bildern und Grafiken wird es vielmals ein oder mehrere Elemente, die genauer erklärt bzw. beschrieben werden müssen. Dafür können wir unsere Pointers verwenden."
       },
       {
-        "type": "p",
-        "text": "\"![Hinweispfeile] (mh-Artboard 16.jpg)\""
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-form-language-mh-Artboard-16.jpg",
+        "alt": "Hinweispfeile"
       },
       {
         "type": "h3",
@@ -817,8 +825,9 @@
         "text": "Ansonsten, können wir auch Hinweiszahlen verwenden, die folgendermaßen aussehen sollten:"
       },
       {
-        "type": "p",
-        "text": "\"![Kombi aus Schrift und Icon] (mh-Artboard 36.jpg)\""
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-form-language-mh-Artboard-36.jpg",
+        "alt": "Kombi aus Schrift und Icon"
       },
       {
         "type": "h2",
@@ -826,7 +835,12 @@
       },
       {
         "type": "p",
-        "text": "Bildelemente haben abgerundete Ecken von 20px \"![Kombi aus Schrift und Icon] (mh-Artboard 36.jpg)\""
+        "text": "Bildelemente haben abgerundete Ecken von 20px"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-form-language-mh-Artboard-36.jpg",
+        "alt": "Kombi aus Schrift und Icon"
       }
     ],
     "downloads": [
@@ -1253,10 +1267,6 @@
         "type": "image",
         "src": "../../assets/images/brand-guidelines-art-direction-mh-Artboard-27.jpg",
         "alt": "Ringe im Kontext"
-      },
-      {
-        "type": "h2",
-        "text": "Beispiele"
       }
     ],
     "downloads": []
