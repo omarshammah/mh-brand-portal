@@ -399,6 +399,14 @@ function buildAssets(data) {
   const lightboxJs = fs.readFileSync(path.join(ROOT, "assets/lightbox.js"), "utf8");
   writeFile(path.join(DIST, "assets/lightbox.js"), lightboxJs);
 
+  // Cookie notice banner (see cookieBannerHtml() above) — only present if
+  // this project has assets/cookie-banner.js. Must actually be copied into
+  // dist/, not just referenced, or the <script> tag 404s at runtime.
+  const cookieBannerSrc = path.join(ROOT, "assets/cookie-banner.js");
+  if (fs.existsSync(cookieBannerSrc)) {
+    writeFile(path.join(DIST, "assets/cookie-banner.js"), fs.readFileSync(cookieBannerSrc, "utf8"));
+  }
+
   // Copy any user-added images across (assets/images/* -> dist/assets/images/*)
   const imgSrc = path.join(ROOT, "assets/images");
   if (fs.existsSync(imgSrc)) {
