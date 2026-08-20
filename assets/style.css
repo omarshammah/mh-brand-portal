@@ -622,7 +622,11 @@ footer a.footer-link-primary {
   text-align: left;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
+}
+.footer-contact .footer-credit {
+  color: var(--muted);
 }
 .footer-contact .footer-contact-btn {
   color: var(--text); /* plain black text, matching footer-link-primary */
