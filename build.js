@@ -195,10 +195,12 @@ function footerHtml(brand, rel) {
         <a href="${rel}imprint/index.html">Imprint</a>
         <a href="${rel}privacy-policy/index.html">Privacy Policy</a>
         <a href="${rel}cookie-policy/index.html">Cookie Policy</a>
-        <a href="https://www.omarshammah.com" target="_blank" rel="noopener" class="footer-link-primary">omarshammah.com</a>
       </div>
     </div>
-    <div class="footer-contact">for questions and inquiries: <a href="mailto:hey@omarshammah.com" class="footer-contact-btn">hey@omarshammah.com</a></div>`;
+    <div class="footer-contact">
+      <span>for questions and inquiries: <a href="mailto:hey@omarshammah.com" class="footer-contact-btn">hey@omarshammah.com</a></span>
+      <span class="footer-credit">Website by <a href="https://www.omarshammah.com" target="_blank" rel="noopener" class="footer-link-primary">omarshammah.com</a></span>
+    </div>`;
 }
 
 // Shared <head> extras that fight the "glitch on navigation" symptom: a
