@@ -199,7 +199,7 @@ function footerHtml(brand, rel) {
     </div>
     <div class="footer-contact">
       <span>for questions and inquiries: <a href="mailto:hey@omarshammah.com" class="footer-contact-btn">hey@omarshammah.com</a></span>
-      <span class="footer-credit">Website by <a href="https://www.omarshammah.com" target="_blank" rel="noopener" class="footer-link-primary">omarshammah.com</a></span>
+      <span class="footer-credit">Branding and brand portal by <a href="https://www.omarshammah.com" target="_blank" rel="noopener" class="footer-link-primary">omarshammah.com</a></span>
     </div>`;
 }
 
@@ -398,6 +398,14 @@ function buildAssets(data) {
   // lightboxHtml() above for the markup this wires up.
   const lightboxJs = fs.readFileSync(path.join(ROOT, "assets/lightbox.js"), "utf8");
   writeFile(path.join(DIST, "assets/lightbox.js"), lightboxJs);
+
+  // Cookie notice banner (see cookieBannerHtml() above) — only present if
+  // this project has assets/cookie-banner.js. Must actually be copied into
+  // dist/, not just referenced, or the <script> tag 404s at runtime.
+  const cookieBannerSrc = path.join(ROOT, "assets/cookie-banner.js");
+  if (fs.existsSync(cookieBannerSrc)) {
+    writeFile(path.join(DIST, "assets/cookie-banner.js"), fs.readFileSync(cookieBannerSrc, "utf8"));
+  }
 
   // Copy any user-added images across (assets/images/* -> dist/assets/images/*)
   const imgSrc = path.join(ROOT, "assets/images");
