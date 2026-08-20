@@ -1,23 +1,69 @@
 [
   {
     "slug": "imprint",
-    "title": "Imprint",
+    "title": "Impressum",
     "body": [
-      { "type": "placeholder", "text": "Add the legal disclosure details required in your jurisdiction here (e.g. company/legal name, registered address, contact details, VAT/registration ID)." }
+      { "type": "h2", "text": "Angaben gemäß § 5 DDG" },
+      { "type": "p", "text": "MH Concepts AG<br>Zehlendorfer Damm 75<br>14532 Kleinmachnow" },
+      { "type": "h2", "text": "Vertreten durch" },
+      { "type": "p", "text": "Vorstand: Dr. Michaela Hösl" },
+      { "type": "h2", "text": "Kontakt" },
+      { "type": "p", "text": "Telefon: +49 171 8487232<br>E-Mail: <a href=\"mailto:mail@mh-concepts.de\">mail@mh-concepts.de</a>" },
+      { "type": "h2", "text": "Registereintrag" },
+      { "type": "p", "text": "Eintragung im Handelsregister.<br>Registergericht: Amtsgericht Potsdam<br>Registernummer: HRB 41378 P" },
+      { "type": "h2", "text": "Steuernummer" },
+      { "type": "p", "text": "046/114/01847" },
+      { "type": "h2", "text": "Bankverbindung" },
+      { "type": "p", "text": "Commerzbank<br>IBAN: DE19 1604 0000 0100 0579 00<br>BIC: DRESDEFF100" }
     ]
   },
   {
     "slug": "privacy-policy",
-    "title": "Privacy Policy",
+    "title": "Datenschutzerklärung",
     "body": [
-      { "type": "placeholder", "text": "Add your privacy policy here — what data this site collects, how it's used, and how visitors can exercise their rights." }
+      { "type": "h2", "text": "Verantwortlicher" },
+      { "type": "p", "text": "MH Concepts AG<br>Zehlendorfer Damm 75<br>14532 Kleinmachnow<br>E-Mail: <a href=\"mailto:mail@mh-concepts.de\">mail@mh-concepts.de</a><br>Telefon: +49 171 8487232" },
+      { "type": "h2", "text": "Allgemeiner Hinweis" },
+      { "type": "p", "text": "Diese Website ist ein passwortgeschützter interner Markenauftritt (Brand Portal) ohne Nutzerkonten, ohne Kontakt- oder sonstige Formulare und ohne Analyse- oder Tracking-Tools. Es werden ausschließlich die im Folgenden beschriebenen, technisch notwendigen Daten verarbeitet." },
+      { "type": "h2", "text": "Hosting" },
+      { "type": "p", "text": "Diese Website wird über Cloudflare, Inc. gehostet und ausgeliefert. Cloudflare verarbeitet dabei technische Verbindungsdaten (u. a. IP-Adressen) als Auftragsverarbeiter, mit dem ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO besteht. Cloudflare ist nach dem EU-U.S. Data Privacy Framework zertifiziert, wodurch ein angemessenes Datenschutzniveau für die Datenübermittlung in die USA sichergestellt ist." },
+      { "type": "h2", "text": "Zugriffsdaten / Server-Logfiles" },
+      { "type": "p", "text": "Beim Aufruf dieser Website werden aus technischen Gründen automatisch folgende Daten in Server-Logfiles erfasst: IP-Adresse, Datum und Uhrzeit des Zugriffs, aufgerufene Seite, verwendeter Browser und verwendetes Betriebssystem. Diese Daten dienen ausschließlich der technischen Auslieferung der Website und der Gewährleistung der Systemsicherheit (Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse an einem störungsfreien und sicheren Betrieb). Eine Zusammenführung mit anderen Daten findet nicht statt." },
+      { "type": "h2", "text": "Passwortschutz (Cookie)" },
+      { "type": "p", "text": "Diese Website ist durch ein Passwort geschützt. Nach erfolgreicher Eingabe wird ein technisch notwendiges Cookie gesetzt, das den Zugang für 30 Tage speichert, damit das Passwort nicht bei jedem Seitenaufruf erneut eingegeben werden muss. Weitere Informationen dazu finden Sie in der <a href=\"../cookie-policy/index.html\">Cookie-Erklärung</a>." },
+      { "type": "h2", "text": "Kontaktaufnahme per E-Mail" },
+      { "type": "p", "text": "Der E-Mail-Button in der Fußzeile öffnet lediglich das E-Mail-Programm des Besuchers (mailto-Link). Es werden dabei keine Daten über diese Website übertragen oder gespeichert. Entscheiden Sie sich, uns eine E-Mail zu senden, verarbeiten wir die von Ihnen darin mitgeteilten Daten (z. B. Name, E-Mail-Adresse, Inhalt) ausschließlich zur Bearbeitung Ihrer Anfrage (Rechtsgrundlage: Art. 6 Abs. 1 lit. b bzw. f DSGVO)." },
+      { "type": "h2", "text": "Weitergabe von Daten" },
+      { "type": "p", "text": "Eine Weitergabe Ihrer Daten an Dritte erfolgt nicht, mit Ausnahme der genannten Hosting-Infrastruktur (Cloudflare) als Auftragsverarbeiter." },
+      { "type": "h2", "text": "Ihre Rechte" },
+      { "type": "list", "items": [
+        "Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15 DSGVO)",
+        "Berichtigung unrichtiger Daten (Art. 16 DSGVO)",
+        "Löschung Ihrer Daten (Art. 17 DSGVO)",
+        "Einschränkung der Verarbeitung (Art. 18 DSGVO)",
+        "Datenübertragbarkeit (Art. 20 DSGVO)",
+        "Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)",
+        "Beschwerde bei einer Datenschutz-Aufsichtsbehörde (Art. 77 DSGVO)"
+      ] },
+      { "type": "p", "text": "Zur Ausübung dieser Rechte wenden Sie sich bitte an die oben genannten Kontaktdaten." },
+      { "type": "h2", "text": "Änderungen dieser Datenschutzerklärung" },
+      { "type": "p", "text": "Diese Datenschutzerklärung wird bei Bedarf angepasst, um stets den aktuellen rechtlichen Anforderungen zu entsprechen bzw. Änderungen der Website widerzuspiegeln." }
     ]
   },
   {
     "slug": "cookie-policy",
-    "title": "Cookie Policy",
+    "title": "Cookie-Erklärung",
     "body": [
-      { "type": "placeholder", "text": "Add your cookie policy here — what cookies this site uses (if any) and how visitors can manage their preferences." }
+      { "type": "p", "text": "Cookies sind kleine Textdateien, die beim Besuch einer Website auf Ihrem Endgerät gespeichert werden. Diese Website verwendet ausschließlich das folgende, technisch notwendige Cookie:" },
+      { "type": "table", "headers": ["Name", "Zweck", "Speicherdauer", "Kategorie"], "rows": [
+        ["mh_gate", "Speichert den Zugang nach erfolgreicher Passworteingabe", "30 Tage", "Technisch notwendig"]
+      ] },
+      { "type": "h2", "text": "Einwilligung" },
+      { "type": "p", "text": "Da es sich bei diesem Cookie um ein technisch notwendiges Cookie handelt, das ausschließlich zur Erbringung des von Ihnen ausdrücklich angeforderten Dienstes (Zugang zum passwortgeschützten Bereich) dient, ist gemäß § 25 Abs. 2 Nr. 2 TTDSG keine Einwilligung erforderlich. Der Hinweis-Banner auf dieser Website dient der Transparenz." },
+      { "type": "h2", "text": "Weitere Cookies" },
+      { "type": "p", "text": "Es sind aktuell keine weiteren Cookies (z. B. für Analyse, Marketing oder durch Drittanbieter) im Einsatz." },
+      { "type": "h2", "text": "Verwaltung" },
+      { "type": "p", "text": "Sie können Cookies jederzeit über die Einstellungen Ihres Browsers löschen oder blockieren. Bitte beachten Sie, dass das Löschen des mh_gate-Cookies dazu führt, dass Sie das Passwort beim nächsten Besuch erneut eingeben müssen. Weitere Informationen zur Datenverarbeitung finden Sie in unserer <a href=\"../privacy-policy/index.html\">Datenschutzerklärung</a>." }
     ]
   }
 ]
