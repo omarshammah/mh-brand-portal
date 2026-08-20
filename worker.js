@@ -17,6 +17,22 @@ const PUBLIC_PATHS = new Set([
   "/assets/images/logo.svg",
   "/assets/fonts/NeueCampton-Regular.woff2",
   "/assets/fonts/NeueCampton-Light.woff2",
+  "/assets/lightbox.js",
+  "/assets/cookie-banner.js",
+]);
+
+// Imprint/Datenschutz/Cookie-Erklärung must stay reachable WITHOUT the
+// password — German Impressumspflicht (§5 DDG) requires these to be
+// accessible to any visitor, not just ones who already have the password.
+// Both the directory URL and its index.html are allowed since either form
+// could be requested.
+const PUBLIC_PAGES = new Set([
+  "/imprint/",
+  "/imprint/index.html",
+  "/privacy-policy/",
+  "/privacy-policy/index.html",
+  "/cookie-policy/",
+  "/cookie-policy/index.html",
 ]);
 
 async function tokenFor(password) {
@@ -69,6 +85,8 @@ function gatePage({ error = false, redirectTo = "/" } = {}) {
   }
   .gate-box button:hover { opacity: 0.85; }
   .gate-error { color: #C0392B; font-size: 13px; margin: -8px 0 14px 0; }
+  .gate-legal { margin-top: 24px; display: flex; justify-content: center; gap: 16px; }
+  .gate-legal a { font-size: 12px; color: var(--muted); text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -82,6 +100,11 @@ function gatePage({ error = false, redirectTo = "/" } = {}) {
       <input type="password" name="password" placeholder="Password" autofocus required />
       <button type="submit">Enter</button>
     </form>
+    <div class="gate-legal">
+      <a href="/imprint/index.html">Impressum</a>
+      <a href="/privacy-policy/index.html">Datenschutz</a>
+      <a href="/cookie-policy/index.html">Cookies</a>
+    </div>
   </div>
 </body>
 </html>`;
@@ -91,7 +114,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    if (PUBLIC_PATHS.has(url.pathname)) {
+    if (PUBLIC_PATHS.has(url.pathname) || PUBLIC_PAGES.has(url.pathname)) {
       return env.ASSETS.fetch(request);
     }
 
