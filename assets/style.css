@@ -480,6 +480,53 @@ figure.content-figure figcaption {
 body.lightbox-locked {
   overflow: hidden;
 }
+
+/* Cookie notice banner (see assets/cookie-banner.js) — a plain transparency
+   notice, not an accept/reject choice, since the one cookie this site sets
+   is strictly necessary and has nothing optional to decline. */
+.cookie-banner {
+  position: fixed;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  z-index: 90;
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: var(--text);
+  color: #fff;
+  padding: 16px 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.cookie-banner p {
+  margin: 0;
+  flex: 1 1 260px;
+}
+.cookie-banner a {
+  color: #fff;
+  text-decoration: underline;
+}
+.cookie-banner .cookie-banner-ok {
+  flex: 0 0 auto;
+  background: #fff;
+  color: var(--text);
+  border: none;
+  border-radius: 100vw;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+.cookie-banner .cookie-banner-ok:hover {
+  opacity: 0.85;
+}
 .content-embed {
   position: relative;
   width: 100%;
