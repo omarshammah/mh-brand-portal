@@ -227,6 +227,16 @@ function lightboxHtml(rel) {
   <script src="${rel}assets/lightbox.js" defer></script>`;
 }
 
+// Cookie notice banner (see assets/cookie-banner.js) — only present if
+// assets/cookie-banner.js exists in this project, so the generic template
+// stays banner-free until a client's legal pages actually need one.
+// data-rel lets the script build a correct link back to /cookie-policy/
+// from any page depth without hardcoding it per page.
+function cookieBannerHtml(rel) {
+  if (!fs.existsSync(path.join(ROOT, "assets/cookie-banner.js"))) return "";
+  return `<script src="${rel}assets/cookie-banner.js" data-rel="${rel}" defer></script>`;
+}
+
 function pageShell({ brand, title, navActive, sidebar, bodyHtml, rel }) {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -253,6 +263,7 @@ function pageShell({ brand, title, navActive, sidebar, bodyHtml, rel }) {
     ${footerHtml(brand, rel)}
   </footer>
   ${lightboxHtml(rel)}
+  ${cookieBannerHtml(rel)}
 </body>
 </html>`;
 }
@@ -364,6 +375,7 @@ function buildLegalPage(page, data) {
     ${footerHtml(brand, rel)}
   </footer>
   ${lightboxHtml(rel)}
+  ${cookieBannerHtml(rel)}
 </body>
 </html>`;
   writeFile(path.join(DIST, page.slug, "index.html"), html);
