@@ -348,7 +348,7 @@
       },
       {
         "type": "image",
-        "src": "../../assets/images/brand-guidelines-logo-system-mh-logosystemArtboard-33.jpg",
+        "src": "../../assets/images/brand-guidelines-logo-system-mh-logosystemArtboard-63.jpg",
         "alt": "Zusammenbau Ringe und Schriftzug"
       },
       {
@@ -362,12 +362,31 @@
       },
       {
         "type": "image",
-        "src": "../../assets/images/brand-guidelines-logo-system-mh-logosystemArtboard-32.jpg",
+        "src": "../../assets/images/brand-guidelines-logo-system-mh-logosystemArtboard-64.jpg",
         "alt": "Schutzraum Logotype"
       },
       {
         "type": "h2",
-        "text": "Größe & Platzierung"
+        "text": "Zentrierte Version"
+      },
+      {
+        "type": "p",
+        "text": "Die zentrierte Version ist in erster Linie nur für die räumliche Nutzung gedacht, wie z.B. in der Beschilderung vor der Praxis."
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-logo-system-mh-logosystemArtboard-60.jpg",
+        "alt": "Schutzraum Logomark"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-logo-system-mh-logosystemArtboard-65.jpg",
+        "alt": "Schutzraum Logomark"
+      },
+      {
+        "type": "image",
+        "src": "../../assets/images/brand-guidelines-logo-system-mh-logosystemArtboard-66.jpg",
+        "alt": "Schutzraum Logotype"
       }
     ],
     "downloads": [
