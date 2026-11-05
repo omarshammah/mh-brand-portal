@@ -388,10 +388,13 @@ function main() {
 
     const categoryPages = pages.filter((p) => p.categoryId === category.id);
     for (const page of categoryPages) {
-      const pageDir = path.join(categoryDir, page.slug);
+      // Optional per-page overrides in pages.json for source folders that don't
+      // follow the <slug>/<slug>.md convention: "sourceDir" (folder name) and
+      // "sourceMd" (markdown filename inside it).
+      const pageDir = path.join(categoryDir, page.sourceDir || page.slug);
       if (!fs.existsSync(pageDir)) continue;
 
-      const mdPath = path.join(pageDir, `${page.slug}.md`);
+      const mdPath = path.join(pageDir, page.sourceMd || `${page.slug}.md`);
       const contentDir = path.join(pageDir, "content");
       if (fs.existsSync(mdPath)) {
         const md = fs.readFileSync(mdPath, "utf8");
